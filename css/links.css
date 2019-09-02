@@ -1,0 +1,91 @@
+/* 
+    头部样式
+*/
+#header{
+
+    font-family: 华文楷体;
+    color: #1e1e1e;
+    font-weight: bold;
+
+    padding-left: 14px;
+    background-color: white;
+    height: 60px;
+}
+
+#header *{
+    float: left;
+    color: #4C4C4C;
+}
+
+#header #title{
+    font-size: 32px;
+    height: 100%;
+    line-height: 1.8em;
+    padding-right: 13.5px;
+    border-right: #EFEFEF 2px solid;
+}
+
+#header .other{
+    font-size: 22px;
+    height: 90%;
+    line-height: 2.7em;
+
+    margin-left: 13.5px;
+    transition: border-bottom 0.2s;
+}
+#header .other:hover{
+    border-bottom: firebrick 4px solid;
+}
+#header a:hover{
+    color: #0079C1;
+}
+
+#content{
+    border-top: purple 8px solid;
+}
+#content .bookmarks{
+	display: none;
+}
+#content .bookmarks .box{
+	float: left;
+	padding: 10px;
+	background-color: #333333;
+	border-left: 4px purple solid ;
+	height: 53px;
+	margin: 10px;
+}
+#content .bookmarks .box .name{
+	font-size: 28px;
+	font-family: "仿宋";
+	font-weight: bold;
+}
+#content .bookmarks .box .description{
+	font-size: 14px;
+	color: #C5C5C5;
+	text-indent: 2em;
+}
+
+#fgx{
+    /*height: 50px;*/
+    
+	position: absolute;
+	left: 80%;
+	z-index: 10;
+	opacity: 0.7;
+	background-color: purple;
+	width: 200px;
+	float: right;
+	font-size: 30px;
+	text-align: center;
+	cursor: pointer;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+#fgx #dir div{
+	/*display: block;*/
+	color: yellow;
+}
+#fgx #dir div:hover{
+	color: black;
+	background-color: yellow;
+}

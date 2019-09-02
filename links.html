@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>春.江.花.朝.秋.月.夜.</title>
+    <link rel="stylesheet" href="./css/default.css">
+    <link rel="stylesheet" href="./css/links.css">
+
+    <style>
+        body{  /* 渐变背景色 */
+            background-image: linear-gradient(to left, #434343 0%, black 100%);
+        }
+    </style>
+    
+    <!-- 网络脚本 -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+
+</head>
+<body>
+    <div id="header">
+        <div id="title" onclick="alert('我嘅意中人系个盖世英雄，有一日佢会搭住七色彩云嚟迎娶我')"><a href="#">Ngheizit常用的链接库</a></div>
+        <div class="other"><a href="./index.html">Back to HOME</a></div>
+        <div class="other"><a href="../BLOGS/index.html">Go to BLOGS</a></div>
+    </div>
+
+    <div id="fgx" class="clearfix">
+        🙇‍♀️👇👇🙇‍♂️
+        <div id="dir" style="display: none;border-top: 8px solid #00475B;">
+            <div id="bm_user">~无常~</div>
+            <div id="bm_coding">~程式~</div>
+            <div id="bm_mapData" >~GeoData~</div>
+            <div id="bm_gisShare">~GISLearn~</div>
+            <div id="bm_elses">~Else~</div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("#fgx").mousemove(function(){
+                $("#dir").slideDown(300);
+            });
+            $("#fgx").mouseleave(function(){
+                $("#dir").slideUp(200);
+            });
+            $("#bm_coding").click(function(){
+                $("#bookmarks_user").slideUp(500);
+                $("#bookmarks_crimeMapping").slideUp(500);
+                $("#bookmarks_mapData").slideUp(500);
+                $("#bookmarks_gisShare").slideUp(500);
+                $("#bookmarks_elses").slideUp(500);
+                $("#bookmarks_coding").slideDown(500);
+            });
+            $("#bm_user").click(function(){
+                $("#bookmarks_coding").slideUp(500);
+                $("#bookmarks_crimeMapping").slideUp(500);
+                $("#bookmarks_mapData").slideUp(500);
+                $("#bookmarks_gisShare").slideUp(500);
+                $("#bookmarks_elses").slideUp(500);
+                $("#bookmarks_user").slideDown(500);
+            });
+            $("#bm_mapData").click(function(){
+                $("#bookmarks_coding").slideUp(500);
+                $("#bookmarks_user").slideUp(500);
+                $("#bookmarks_crimeMapping").slideUp(500);
+                $("#bookmarks_gisShare").slideUp(500);
+                $("#bookmarks_elses").slideUp(500);
+                $("#bookmarks_mapData").slideDown(500);
+            });
+            $("#bm_gisShare").click(function(){
+                $("#bookmarks_coding").slideUp(500);
+                $("#bookmarks_user").slideUp(500);
+                $("#bookmarks_crimeMapping").slideUp(500);
+                $("#bookmarks_mapData").slideUp(500);
+                $("#bookmarks_elses").slideUp(500);
+                $("#bookmarks_gisShare").slideDown(500);
+            });
+            $("#bm_elses").click(function(){
+                $("#bookmarks_coding").slideUp(500);
+                $("#bookmarks_user").slideUp(500);
+                $("#bookmarks_crimeMapping").slideUp(500);
+                $("#bookmarks_mapData").slideUp(500);
+                $("#bookmarks_gisShare").slideUp(500);
+                $("#bookmarks_elses").slideDown(500);
+            });
+        });
+    </script>
+
+    <div id="content">
+        <div id="bookmarks_user" style="display: block;">
+        
+        </div>
+        <div id="bookmarks_coding">
+            
+        </div>
+        <div id="bookmarks_mapData">
+            
+        </div>
+        <div id="bookmarks_gisShare">
+            
+        </div>
+        <div id="bookmarks_elses">
+            
+        </div>
+        <script src="./js/links.js"></script>
+    </div>
+
+    <div id="footer">
+
+    </div>
+
+</body>
+</html>
