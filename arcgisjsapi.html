@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebMap:ArcGIS JS</title>
+    <style>
+        /* 清除默认标签html和body的默认样式 && 全屏化地图容器 */
+        html, body, #viewDiv{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <!-- 导入ArcGIS for JavaScript API 4.12 -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.12/"></script>
+
+</head>
+<body>
+    <!-- 地图容器 -->
+    <div id="viewDiv"></div>
+</body>
+<script>
+    /*
+        require(参数1, 参数2)
+            - 参数1：
+                -- 需要引用的模块s，（字符串）数组类型
+            - 参数2：
+                -- 回调函数，参数（顺序）与引用的模块（顺序）一一对应
+    */
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/widgets/BasemapGallery",
+        "esri/widgets/BasemapToggle",
+        "esri/layers/FeatureLayer"
+    ], function(Map, MapView, BasemapGallery, BasemapToggle, FeatureLayer){
+        var map = new Map({
+            basemap: "topo-vector"
+        });
+        var view = new MapView({
+            container: "viewDiv",
+            map: map,
+            center: [115, 23],
+            zoom: 5
+        });
+
+        // 创建具有切换（多种）底图地图功能的小部件
+        var basemapGallery = new BasemapGallery({
+            view: view,
+            source: {
+                portal: {
+                    url: "http://www.arcgis.com",
+                    useVectorBasemaps: true
+                }
+            }
+        });
+
+        // 小部件：两底图间的相互切换
+        var basemapToggle = new BasemapToggle({
+            view: view,
+            secondMap: "satellite"
+        });
+        
+        // 将小部件添加到视图的相应位置（"top-left" || "top-right" || "bottom-left" || "bottom-right"）
+        view.ui.add(basemapGallery, "top-right");
+        view.ui.add(basemapToggle, "bottom-left");
+
+
+        // 将图层添加到地图中
+        // 面图层
+        AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/ArcGIS/rest/services/%e4%b8%ad%e5%9b%bd%e7%9c%81%e7%ba%a7%e8%a1%8c%e6%94%bf%e5%8d%95%e5%85%83/FeatureServer/0");
+        // 线图层
+        AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/arcgis/rest/services/%E4%B8%AD%E5%9B%BD%E8%A1%8C%E6%94%BF%E7%95%8C%E7%BA%BF/FeatureServer/0");
+        // 点图层
+        AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/ArcGIS/rest/services/中国省级行政中心/FeatureServer/0");
+
+        // 方法：通过url添加要素图层
+        function AddFeatureLayer(url){
+            var layer = new FeatureLayer({
+                url: url
+            });
+            map.add(layer);
+        }
+
+    });
+</script>
+</html>
