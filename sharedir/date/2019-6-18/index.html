@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 网页元数据--------------------------------------------------------------------- -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="description" content="河北师范大学资源与环境科学学院2017级GIS专业学生Ngheizi（吴希浙）开发的个人网站，这是第五代哈哈哈">
+    <meta name="keyword" content="GIS, 个人网站">
+    <meta name="author" content="Xizhe Wu, ngheizitgis@outlook.com">
+    <meta name="robots" content="index">
+    <!-- ------------------------------------------------------------------------------ -->
+
+    <title>图形面积的计算 - 坐标解析法</title>
+
+    <!-- 链接样式 -->
+    <link rel="stylesheet" href="../../../css/default.css">
+    <link rel="stylesheet" href="../../css/HBS.CSS">
+    <link rel="stylesheet" href="../../css/frame.css">
+
+    <!-- 网络脚本 -->
+    <!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script> -->
+
+</head>
+<body style="background-image:linear-gradient(to left, #fff 0%, #fff 100%)">
+    <div id="header">
+        <div id="title"><a href="#">Ngheizit的技术贴</a></div>
+        <div class="other"><a href="../../../index.html">Back to HOME</a></div>
+        <div class="other"><a href="../../../share.html">Back to SHARECatalog</a></div>
+    </div>
+
+    <div id="content">
+        <div id="topleftbox">GIS World</div>
+        <div id="mainbox">
+
+            
+            <div id="blog_title">图形面积的计算 <p>- 坐标解析法</p></div>
+
+
+            <div id="blog_info">
+                <div id="leftdate">2019年6月18日</div>
+                <div id="rightauthor">Xizhe Wu / Ngheizit</div>
+            </div>
+
+            <div id="blog_foreword">
+                <div class="blog_p">许多类型的地理计算与空间分析都需要度量功能，例如，希望知道一块地块的面积、两点间的距离，或则测量一条河流的长度等，这些信息都可以借助于GIS进行简单计算获得。</div>
+                <div class="blog_p">面积量算是其中的一个几何度量模块。在二维平面里，坐标解析法是计算面积的一种方法。</div>
+            </div>
+            <div id="blog_content">
+                <div class="blog_p">坐标解析法根据多边形顶点的坐标来计算其面积，又称梯形法。</div>
+                <div class="blog_reference">在矢量结构中，面状地物以轮廓边界弧段构成的多边形表示，坐标解析法的基本思想是：在平面直角坐标系中，按多边形顶点顺序依次求出多边形所有边x轴（或y轴）组成的梯形面积，然后求其代数和，多边形边界与坐标轴组成的多边形外部梯形部分的面积将由计算的正负差值抵消，最后剩下多边形内部梯形部分面积。</div>
+                <div class="blog_p">对于没有空洞的简单多边形，假设由N个顶点，其中S为多边形面积，(x, y)为多边形顶点坐标。其面积公式为</div>
+                <div class="blog_formula">S=½∑<sup style="position: relative; bottom: 2px;">n-1</sup><sub style="position: relative; right: 21px; top: 5px;">i=0</sub>(x<sub>i+1</sub>-x<sub>i</sub>)(y<sub>i+1</sub>+y<sub>i</sub>)</div>
+                <div class="blog_p">公式的代码实现：</div>
+                <iframe src="./AreaCoordinateAnalysis.html" frameborder="0" width="100%" height="500px"></iframe>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="footer">
+
+    </div>
+
+
+</body>

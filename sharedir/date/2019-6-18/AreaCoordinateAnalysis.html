@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			window.onload = function(){
+				
+
+				
+				
+				//获取操作画布的按钮对象s
+				var btn_AddXY = document.getElementById("AddXY");
+				var btn_CancleXY = document.getElementById("CancleXY");
+				var btn_Closure = document.getElementById("Closure");
+				var btn_MoveAllXY = document.getElementById("MoveAllXY");
+				var btn_Area = document.getElementById("calculationArea");
+				
+				//获取XY数据输入框对象s
+				var input_x = document.getElementById("input_x");
+				var input_y = document.getElementById("input_y");
+				
+				//获取图画对象
+				var polyline = document.querySelectorAll("#CoordinateSystem polyline")[0];
+				
+				//获取画布对象
+				var svg = document.getElementById("CoordinateSystem");
+				
+				//获取画布坐标显示框对象
+				var showNowXY = document.getElementById("ShowNowXY");
+				
+				//获取图形点集显示框对象
+				var showXYs = document.getElementById("showXYs");
+				
+				
+				
+				/*
+				 * 画布坐标显示事件
+				 */
+				svg.onmousemove = function(event){
+					var x = event.pageX;
+					var y = -(event.pageY - 405);
+					showNowXY.innerText = "鼠标所在画布坐标：X = " + x + "; Y = " + y + "。点击画布可提取相应坐标点";
+				};
+				
+				
+				/*
+				 * 点击画布获取坐标点事件
+				 */
+				svg.onclick = function(event){
+					var x = event.pageX;
+					var y = -(event.pageY - 405);
+					input_x.value = x;
+					input_y.value = y;
+				};
+				
+				function readXYs(){
+					str = "";
+					for(var i = 0; i < XYs.length; i+=2){
+						str +="第" + (i/2+1) + "个点：x=" + XYs[i] + " , y=" + XYs[i+1] + "<br />";
+					}
+					showXYs.innerHTML = "当前画布已添加的点集：<br />" + str;
+				}
+				
+				
+				/*
+				 * 按钮点击事件
+				 */
+				//定义一个数组对象用于存储图形点集
+				var XYs=[];
+				//"添加"按钮
+				btn_AddXY.onclick = function(){
+					var points_text = polyline.getAttribute("points");
+					XYs.push(input_x.value,input_y.value);
+					var str = "";
+					for(var i = 0; i < XYs.length; i+=2){
+						str += XYs[i] + "," + XYs[i+1] + " ";
+					}
+					points_text = str;
+					polyline.setAttribute("points", points_text);
+					readXYs();
+				};
+				//“撤销”按钮
+				btn_CancleXY.onclick = function(){
+					var points_text = polyline.getAttribute("points");
+					XYs.pop();
+					XYs.pop();
+					var str = "";
+					for(var i = 0; i < XYs.length; i+=2){
+						str += XYs[i] + "," + XYs[i+1] + " ";
+					}
+					points_text = str;
+					polyline.setAttribute("points", points_text);
+					readXYs()
+				};
+				//“图形合并”按钮
+				btn_Closure.onclick = function(){
+					var points_text = polyline.getAttribute("points");
+					XYs.push(XYs[0]);
+					XYs.push(XYs[1]);
+					var str = "";
+					for(var i = 0; i < XYs.length; i+=2){
+						str += XYs[i] + "," + XYs[i+1] + " ";
+					}
+					points_text = str;
+					polyline.setAttribute("points", points_text);
+					readXYs()
+					
+				};
+				//“清空按钮”
+				btn_MoveAllXY.onclick = function(){
+					var points_text = polyline.getAttribute("points");
+					XYs = [];
+					polyline.setAttribute("points", points_text="");
+					readXYs()
+				};
+				//计算面积按钮
+				var showArea = document.getElementById("area");
+				btn_Area.onclick = function(){
+					if(XYs[0]!=XYs[XYs.length-2]&&XYs[1]!=XYs[XYs.length-1]){
+						alert("图形未合并");
+						return;
+					}
+					
+					var area = 0.0;
+					for(var i = 0; i < XYs.length - 2; i+=2){
+						area += 0.5*((parseInt(XYs[i+2]) - parseInt(XYs[i]))*(parseInt(XYs[i+3]) + parseInt(XYs[i+1])));
+					}
+					area = Math.abs(area);
+					showArea.innerText = "图形面积为：" + area;
+					
+				};
+				
+				
+				
+			};
+		</script>
+		
+		
+		
+		
+		
+		<style type="text/css">
+		
+			
+			/*
+			 * 设置画布（坐标轴）区域样式
+			 */
+			#contorlCS #CoordinateSystem{
+				width: 100%;  /*  控制画布宽  */
+				height: 400px; /*  控制画布高  */
+				border: 1px solid #c4c4c4;  /*  画布边框样式   */
+				background-color: #E4E4E4; /*  画布背景颜色   */
+				transform:rotateX(180deg);  /*   垂直180°反转画布    目的是调整XY坐标轴   */
+				overflow: auto;  /*   防止过大数据添加时超出画布而丢失   */
+				/*   设置X轴样式      */
+				border-top-color: red;  
+				border-top-width: 4px;
+				/*  设置Y轴样式   */
+				border-left-color: blue;
+				border-left-width: 4px;
+			}
+			#contorlCS{
+				width: 500px;  /*   控制画布初始宽    */
+				position: relative;
+			}
+			#contorlCS input{
+				width: 40px;  /*   输入框宽       */
+			}
+			#contorlCS span{
+				/* 设置左右外边距  */
+				margin-left: 5px;
+				margin-right: 5px;
+			}
+			#contorlCS button{
+				width: 60px;  /*  按钮宽   */
+			}
+			
+			#showXYs{
+				position: absolute;
+				top: 20px;
+				left: 505px;
+				width: 200px;
+			}
+			#contorlCS #area{
+				font-weight: bold;
+			}
+
+		
+		
+		</style>
+		
+		
+	</head>
+	<body>
+		<div id="contorlCS">
+			
+			<svg id="CoordinateSystem">
+				<polyline points="" style="fill:skyblue;stroke:black;stroke-width:1;" />
+			</svg>
+			<div id="ShowNowXY">坐标点可通过点击画布提取</div>
+			<br />
+			<span>添加X轴坐标：</span><input type="text" id="input_x" value="0" />；
+			<span>添加Y轴坐标：</span><input type="text" id="input_y" value="0" />；
+			<br />
+			<button id="AddXY">添加</button>
+			<button id="CancleXY">撤销</button>
+			<button id="Closure">图形闭合</button>	
+			<button id="MoveAllXY">清空</button>
+			<button id="calculationArea">面积计算</button>
+			<span id="area">
+				......
+			</span>
+			<br />
+			<div id="showXYs">
+				当前画布已添加的点集：
+			</div>
+		</div>
+	</body>
+</html>

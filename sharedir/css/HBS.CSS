@@ -1,0 +1,42 @@
+
+        /* 
+        头部样式
+        */
+        #header{
+
+            font-family: 华文楷体;
+            color: #1e1e1e;
+            font-weight: bold;
+    
+            padding-left: 14px;
+            background-color: white;
+            height: 60px;
+            }
+    
+            #header *{
+            float: left;
+            color: #4C4C4C;
+            }
+    
+            #header #title{
+            font-size: 32px;
+            height: 100%;
+            line-height: 1.8em;
+            padding-right: 13.5px;
+            border-right: #EFEFEF 2px solid;
+            }
+    
+            #header .other{
+            font-size: 22px;
+            height: 90%;
+            line-height: 2.7em;
+    
+            margin-left: 13.5px;
+            transition: border-bottom 0.2s;
+            }
+            #header .other:hover{
+            border-bottom: firebrick 4px solid;
+            }
+            #header a:hover{
+            color: #0079C1;
+            }

@@ -1,0 +1,81 @@
+#begin_box{
+    height: 200px;
+    background-image: linear-gradient(70deg, #6129bf, #af52eb);
+    margin-bottom: 50px;
+}
+
+#begin_box #show{
+    color: white;
+    height: 100%;
+    margin: 0px auto;
+    padding-left: 2.5%;
+    padding-top: 45px;
+}
+
+#begin_box #show #showMain{
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+#begin_box #show #showMain2{
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+#content{
+    padding: 0 2%;
+}
+
+#content .blogbox{
+    background-color: #F1F2FA;
+    color: rgb(100, 95, 95);
+    border: #A9A9A9 1px solid;
+
+    transition: background 0.25s, color 0.25s, border 0.25s;
+
+}
+#content .blogbox:hover{
+    background-color: #D2E9F9;
+    color: #007AC2;
+    border: #007AC2 1px solid;
+}
+/* 
+    头部样式
+*/
+#header{
+
+    font-family: 华文楷体;
+    color: #1e1e1e;
+    font-weight: bold;
+
+    padding-left: 14px;
+    background-color: white;
+    height: 60px;
+}
+
+#header *{
+    float: left;
+    color: #4C4C4C;
+}
+
+#header #title{
+    font-size: 32px;
+    height: 100%;
+    line-height: 1.8em;
+    padding-right: 13.5px;
+    border-right: #EFEFEF 2px solid;
+}
+
+#header .other{
+    font-size: 22px;
+    height: 90%;
+    line-height: 2.7em;
+
+    margin-left: 13.5px;
+    transition: border-bottom 0.2s;
+}
+#header .other:hover{
+    border-bottom: firebrick 4px solid;
+}
+#header a:hover{
+    color: #0079C1;
+}
