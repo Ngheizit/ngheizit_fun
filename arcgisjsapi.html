@@ -35,10 +35,17 @@
         "esri/views/MapView",
         "esri/widgets/BasemapGallery",
         "esri/widgets/BasemapToggle",
-        "esri/layers/FeatureLayer"
-    ], function(Map, MapView, BasemapGallery, BasemapToggle, FeatureLayer){
+        "esri/layers/FeatureLayer",
+        "esri/layers/GraphicsLayer",
+        "esri/widgets/Sketch"
+    ], function(Map, MapView, BasemapGallery, BasemapToggle, FeatureLayer, GraphicsLayer, Sketch){
+
+        // 草图图层
+        var graphicsLayer = new GraphicsLayer();
+
         var map = new Map({
-            basemap: "topo-vector"
+            basemap: "topo-vector",
+            layers: [graphicsLayer]
         });
         var view = new MapView({
             container: "viewDiv",
@@ -68,13 +75,37 @@
         view.ui.add(basemapGallery, "top-right");
         view.ui.add(basemapToggle, "bottom-left");
 
+
+        
+        // 将图层添加到地图中 - 以栈结构显示
+        urlList_fLayer_CH = [ // 中国基础矢量数据
+            // 行政面域
+            "https://services9.arcgis.com/8vu5jgpRPi7NCKmE/ArcGIS/rest/services/%e4%b8%ad%e5%9b%bd%e7%9c%81%e7%ba%a7%e8%a1%8c%e6%94%bf%e5%8d%95%e5%85%83/FeatureServer/0",
+            // 行政界线
+            "https://services9.arcgis.com/8vu5jgpRPi7NCKmE/arcgis/rest/services/%E4%B8%AD%E5%9B%BD%E8%A1%8C%E6%94%BF%E7%95%8C%E7%BA%BF/FeatureServer/0",
+            // 行政中心
+            "https://services9.arcgis.com/8vu5jgpRPi7NCKmE/ArcGIS/rest/services/中国省级行政中心/FeatureServer/0"
+        ]
+        // 面图层
+        AddFeatureLayer({
+            url: urlList_fLayer_CH[0],
+            opacity: 0.5,
+            popupTemplate: {
+                "title": "{NAME2}",
+                "content": "省级编码：{PAC}；<br />行政中心：{Center}；<br />面积km²：{Area}；<br />行政性质：{Class}；"
+            }
+        });
+        // 线图层
+        AddFeatureLayer({
+            url: urlList_fLayer_CH[1]
+        });
+        // 点图层
         var label = {
             symbol: {
                 type: "text",
                 color: "#000",
                 font: {
                     size: "12px",
-                    style: "italic",
                     weight: "normal"
                 }
             },
@@ -83,30 +114,63 @@
                 expression: "$feature.name"
             }
         };
-        
-
-        // 将图层添加到地图中
-        // 面图层
-        AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/ArcGIS/rest/services/%e4%b8%ad%e5%9b%bd%e7%9c%81%e7%ba%a7%e8%a1%8c%e6%94%bf%e5%8d%95%e5%85%83/FeatureServer/0");
-        // 线图层
-        AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/arcgis/rest/services/%E4%B8%AD%E5%9B%BD%E8%A1%8C%E6%94%BF%E7%95%8C%E7%BA%BF/FeatureServer/0");
-        // 点图层
-        AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/ArcGIS/rest/services/中国省级行政中心/FeatureServer/0", label);
+        AddFeatureLayer({
+            url: urlList_fLayer_CH[2],
+            label: label
+        });
 
         // 方法：通过url添加要素图层
-        function AddFeatureLayer(url, label){
-            if(label != null){
-                var layer = new FeatureLayer({
-                    url: url,
-                    labelingInfo: label
-                });
-            }else{
-                var layer = new FeatureLayer({
-                    url: url
-                });
+        function AddFeatureLayer({url, renderer, label, opacity, popupTemplate, outFields}){
+            var layer = new FeatureLayer({
+                url: url
+            });
+            if(renderer != null){ // （符号化）渲染器
+                layer.renderer = renderer;
+            }
+            if(label != null){ // 注记
+                layer.labelingInfo = label;
+            }
+            if(opacity != null){ // 图层透明度
+                layer.opacity = opacity;
+            }
+            if(popupTemplate != null){ // 点击弹出响应
+                layer.popupTemplate = popupTemplate
+            }
+            if(outFields != null){
+                layer.outFields = outFields
             }
             map.add(layer);
         }
+
+        // 获取地图坐标
+        var coordsWidget = document.createElement("div");
+        coordsWidget.id = "coordsWidget";
+        coordsWidget.className = "esri-widget esri-component";
+        coordsWidget.style.padding = "7px 15px 5px";
+        view.ui.add(coordsWidget, "bottom-right");
+
+        function showCoordinates(pt){
+            var coords = "Lat/Lon" + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) + 
+                        " | Scale 1:" + Math.round(view.scale * 1) / 1 + 
+                        " | Zoom " + view.zoom;
+            coordsWidget.innerHTML = coords;
+        }
+
+        view.watch("stationary", function(isStationary){
+            showCoordinates(view.center);
+        });
+        view.on("pointer-move", function(evt){
+            showCoordinates(view.toMap({x: evt.x, y: evt.y}));
+        });
+
+
+        // 小部件：绘制图形
+        var sketch = new Sketch({
+            view: view,
+            layer: graphicsLayer
+        });
+        view.ui.add(sketch, "bottom-right")
+
 
     });
 </script>
