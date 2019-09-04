@@ -68,6 +68,22 @@
         view.ui.add(basemapGallery, "top-right");
         view.ui.add(basemapToggle, "bottom-left");
 
+        var label = {
+            symbol: {
+                type: "text",
+                color: "#000",
+                font: {
+                    size: "12px",
+                    style: "italic",
+                    weight: "normal"
+                }
+            },
+            labelPlacement: "above-center",
+            labelExpressionInfo: {
+                expression: "$feature.name"
+            }
+        };
+        
 
         // 将图层添加到地图中
         // 面图层
@@ -75,13 +91,20 @@
         // 线图层
         AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/arcgis/rest/services/%E4%B8%AD%E5%9B%BD%E8%A1%8C%E6%94%BF%E7%95%8C%E7%BA%BF/FeatureServer/0");
         // 点图层
-        AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/ArcGIS/rest/services/中国省级行政中心/FeatureServer/0");
+        AddFeatureLayer("https://services9.arcgis.com/8vu5jgpRPi7NCKmE/ArcGIS/rest/services/中国省级行政中心/FeatureServer/0", label);
 
         // 方法：通过url添加要素图层
-        function AddFeatureLayer(url){
-            var layer = new FeatureLayer({
-                url: url
-            });
+        function AddFeatureLayer(url, label){
+            if(label != null){
+                var layer = new FeatureLayer({
+                    url: url,
+                    labelingInfo: label
+                });
+            }else{
+                var layer = new FeatureLayer({
+                    url: url
+                });
+            }
             map.add(layer);
         }
 
