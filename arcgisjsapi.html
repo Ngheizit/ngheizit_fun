@@ -37,8 +37,9 @@
         "esri/widgets/BasemapToggle",
         "esri/layers/FeatureLayer",
         "esri/layers/GraphicsLayer",
-        "esri/widgets/Sketch"
-    ], function(Map, MapView, BasemapGallery, BasemapToggle, FeatureLayer, GraphicsLayer, Sketch){
+        "esri/widgets/Sketch",
+        "esri/widgets/Expand"
+    ], function(Map, MapView, BasemapGallery, BasemapToggle, FeatureLayer, GraphicsLayer, Sketch, Expand){
 
         // 草图图层
         var graphicsLayer = new GraphicsLayer();
@@ -64,6 +65,15 @@
                 }
             }
         });
+        basemapGallery.watch("activeBasemap", function() {
+          var mobileSize =
+            view.heightBreakpoint === "xsmall" ||
+            view.widthBreakpoint === "xsmall";
+
+          if (mobileSize) {
+            bgExpand.collapse();
+          }
+        });
 
         // 小部件：两底图间的相互切换
         var basemapToggle = new BasemapToggle({
@@ -71,9 +81,14 @@
             secondMap: "satellite"
         });
         
+        var expand_basemapGallery = new Expand({
+            view: view,
+            content: basemapGallery
+        })
+
         // 将小部件添加到视图的相应位置（"top-left" || "top-right" || "bottom-left" || "bottom-right"）
-        view.ui.add(basemapGallery, "top-right");
         view.ui.add(basemapToggle, "bottom-left");
+        view.ui.add(expand_basemapGallery, "bottom-left");
 
 
         
@@ -169,7 +184,11 @@
             view: view,
             layer: graphicsLayer
         });
-        view.ui.add(sketch, "bottom-right")
+        var expand_sketch = new Expand({
+            view: view,
+            content: sketch,
+        })
+        view.ui.add(expand_sketch, "top-right")
 
 
     });
