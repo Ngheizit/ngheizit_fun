@@ -11,6 +11,12 @@
             height: 100%;
             width: 100%;
         }
+
+        /* 编辑器样式 */
+        .esri-editor .esri-item-list__scroller{
+            max-height: 350px;
+        }
+
     </style>
 
     <!-- 导入ArcGIS for JavaScript API 4.12 -->
@@ -21,6 +27,8 @@
 <body>
     <!-- 地图容器 -->
     <div id="viewDiv"></div>
+    <!-- 编辑器容器 -->
+    <div id="editorDiv"></div>
 </body>
 <script>
     /*
@@ -32,14 +40,16 @@
     */
     require([
         "esri/Map",
+        "esri/WebMap",
         "esri/views/MapView",
         "esri/widgets/BasemapGallery",
         "esri/widgets/BasemapToggle",
         "esri/layers/FeatureLayer",
         "esri/layers/GraphicsLayer",
         "esri/widgets/Sketch",
+        "esri/widgets/Editor",
         "esri/widgets/Expand"
-    ], function(Map, MapView, BasemapGallery, BasemapToggle, FeatureLayer, GraphicsLayer, Sketch, Expand){
+    ], function(Map, WebMap, MapView, BasemapGallery, BasemapToggle, FeatureLayer, GraphicsLayer, Sketch, Editor, Expand){
 
         // 草图图层
         var graphicsLayer = new GraphicsLayer();
@@ -48,9 +58,16 @@
             basemap: "topo-vector",
             layers: [graphicsLayer]
         });
+
+        var webmap = new WebMap({
+            portalItem: {
+                id: "6c5d657f1cb04a5eb78a450e3c699c2a"
+            }
+        });
+
         var view = new MapView({
             container: "viewDiv",
-            map: map,
+            map: webmap,
             center: [115, 23],
             zoom: 5
         });
@@ -187,9 +204,24 @@
         var expand_sketch = new Expand({
             view: view,
             content: sketch,
-        })
-        view.ui.add(expand_sketch, "top-right")
+        });
+        view.ui.add(expand_sketch, "top-left");
 
+
+        // 小部件：编辑器
+        view.when(function(){
+            view.popup.autoOpenEnabled = false; // disable popups
+            // Create the Editor
+            var editor = new Editor({
+                view: view
+            });
+            // Add widget to top-right of the view
+            var expand_editor = new Expand({
+                view: view,
+                content: editor
+            });
+            view.ui.add(expand_editor, "top-right");
+        });
 
     });
 </script>
