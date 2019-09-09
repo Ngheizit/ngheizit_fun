@@ -105,14 +105,22 @@
 
         // 标题
         var header = document.getElementById("header");
-        view.ui.add(header, "top-left");
+        var expand_header = new Expand({
+                view: view,
+                content: header
+            });
+        view.ui.add(expand_header, "top-left");
 
         // 教程
-        var coordsWidget = document.createElement("div");
-        coordsWidget.className = "esri-widget esri-component";
-        coordsWidget.style.padding = "7px 15px 5px";
-        coordsWidget.innerHTML = "留言方式：编辑器 → 添加要素 → 选择类型 → 地图选点 → 填写信息 → 添加..."
-        view.ui.add(coordsWidget, "bottom-left");
+        var coordsWidget2 = document.createElement("div");
+        coordsWidget2.className = "esri-widget esri-component";
+        coordsWidget2.style.padding = "7px 15px 5px";
+        coordsWidget2.innerHTML = "留言方式：编辑器 → 添加要素 → 选择类型 → 地图选点 → 填写信息 → 添加...";
+        var expand_coordsWidget2 = new Expand({
+                view: view,
+                content: coordsWidget2
+        });
+        view.ui.add(expand_coordsWidget2, "bottom-left");
 
 
         // 获取地图坐标
@@ -120,7 +128,11 @@
         coordsWidget.id = "coordsWidget";
         coordsWidget.className = "esri-widget esri-component";
         coordsWidget.style.padding = "7px 15px 5px";
-        view.ui.add(coordsWidget, "bottom-right");
+        var expand_coordsWidget = new Expand({
+                view: view,
+                content: coordsWidget
+            });
+        view.ui.add(expand_coordsWidget, "bottom-right");
 
         function showCoordinates(pt){
             var coords = "Lat/Lon" + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) + 
