@@ -123,8 +123,8 @@
             url: urlList_fLayer_CH[0],
             opacity: 0.5,
             popupTemplate: {
-                "title": "{NAME2}",
-                "content": "省级编码：{PAC}；<br />行政中心：{Center}；<br />面积km²：{Area}；<br />行政性质：{Class}；"
+                "title": "{Mood}",
+                "content": "时间: {Time} <br />名字：{Username} <br />内容：{Description}"
             }
         });
         // 线图层
@@ -210,7 +210,7 @@
 
         // 小部件：编辑器
         view.when(function(){
-            view.popup.autoOpenEnabled = false; // disable popups
+            view.popup.autoOpenEnabled = true; // disable popups
             // Create the Editor
             var editor = new Editor({
                 view: view
