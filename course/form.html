@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单操作</title>
+</head>
+<body>
+    
+    <fieldset>
+        <legend>信息填写</legend>
+        <form action="MAILTO:ngheizitwu@outlook.com" method="POST" enctype="text/plain">
+            Username: <input type="text" name="username" id="input_username"><br />
+            Passworld: <input type="password" name="password" id="input_password"><br />
+            Sex: 
+            <input type="radio" name="sex" id="input_male" checked><label for="input_male">Male</label>
+            <input type="radio" name="sex" id="input_female"><label for="input_female">Female</label> <br />
+            Season:
+            <input type="checkbox" name="season" id="input_spring"><label for="input_spring">Spring</label>
+            <input type="checkbox" name="season" id="input_summer"><label for="input_summer">Summer</label>
+            <input type="checkbox" name="season" id="input_antumn"><label for="input_antumn">Autumn</label>
+            <input type="checkbox" name="season" id="input_winter"><label for="input_winter">Winter</label> <br />
+            Land:
+            <Select name="land" size="1">
+                <option value="Eurasian">Eurasian continent</option>
+                <option value="Antarctic">Antarctic continent</option>
+                <option value="African">African continent</option>
+                <option value="American">American continent</option>
+            </Select><br />
+            Messagre board:<br />
+            <textarea name="info" id="input_info" cols="50" rows="4"></textarea><br>
+            Upload file:
+            <input type="file" name="file" id="input_file"><br />
+
+            <fieldset>
+                    <legend>HTML5</legend>
+                    Sea:
+                    <input list="sea">
+                    <datalist id="sea">
+                        <option value="The Pacific Ocean">
+                        <option value="Atlantic">
+                        <option value="Indian Ocean">
+                        <option value="Arctic Ocean">
+                    </datalist><br />
+                    Lucky number (between 0 and 100):
+                    <input type="number" name="quantity" min="0" max="100"><br />
+                    Set date:
+                    <input type="date" name="date"><br />
+                    Set date2:
+                    <input type="month" name="month"><br />
+                    Set date3:
+                    <input type="week" name="week"><br />
+                    Select color:
+                    <input type="color" name="color"><br />
+                    Set range:
+                    <input type="range" name="range" min="0" max="100"><br />
+                    Set time:
+                    <input type="time" name="time"><br />
+                    Set datetime:
+                    <input type="datetime" name="datetime"><br />
+                    Set datetime2:
+                    <input type="datetime-local" name="datetime"><br />
+                    Set email:
+                    <input type="email" name="email"><br />
+                    Set Search:
+                    <input type="search" name="search">
+            </fieldset>
+
+            <input type="submit" value="S u b m i t">
+            <input type="reset" value="R e s e t"><br />
+        </form>
+    </fieldset>
+</body>
+</html>
