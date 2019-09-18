@@ -12,9 +12,22 @@
             width: 100%;
         }
 
-        /* 编辑器样式 */
-        .esri-editor .esri-item-list__scroller{
-            max-height: 350px;
+        #screen{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: black;
+            opacity: 0.7;
+        }
+        #password{
+            height: 25px;
+
+            position:absolute;
+            left:50%;    /* 定位父级的50% */
+            top:50%;
+            transform: translate(-50%,-50%); /*自己的50% */
         }
 
     </style>
@@ -27,8 +40,19 @@
 <body>
     <!-- 地图容器 -->
     <div id="viewDiv"></div>
-    <!-- 编辑器容器 -->
-    <div id="editorDiv"></div>
+    
+    <div id="screen">
+        <script>
+            function onTextChange(){
+                var password = document.getElementById("password").value;
+                if(password == "爱你一万年"){
+                    document.getElementById("screen").style.visibility = "hidden";
+                }
+
+            }
+        </script>
+        <input type="text" name="" id="password" onchange="onTextChange()">
+    </div>
 </body>
 <script>
     /*
