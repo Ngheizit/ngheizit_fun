@@ -46,7 +46,9 @@ var bookmarks = {
 		createURL("https://www.oracle.com/index.html", "Oracle官网", "忘记是什么东东啦哈哈哈"),
 		createURL("https://netbeans.org/downloads/8.2/", "NetBeans IDE 下载", "Java编程环境？"),
 		createURL("https://developer.mozilla.org/zh-CN/", "MDN Web 文档", "WEB开发教程"),
-		createURL("https://dojotoolkit.org/documentation/", "Dojo教程 - Dojo Toolkit", "ArcGIS API for JavaScript的重要依托")
+		createURL("https://dojotoolkit.org/documentation/", "Dojo教程 - Dojo Toolkit", "ArcGIS API for JavaScript的重要依托"),
+		createURL("http://www.android-studio.org/index.php/download/hisversion", "Android Studio 中文社区", "Android Studio各版本下载"),
+		createURL("https://developer.android.google.cn/", "Android Developer", "类似镜像的Android Developer")
 	],
 	mapData: [
 		createURL("https://www.openstreetmap.org/", "OpenStreetMap", "开源的全球地理数据共享网，可惜的是中国片区的数据贡献率还是太少了..."),
@@ -101,7 +103,8 @@ var bookmarks = {
         createURL("https://github.com/PKUanonym/REKCARC-TSC-UHT","清华计算机系课程资源","github资源"),
         createURL("https://qsctech.github.io/zju-icicles/","浙大课程资源","github资源"),
         createURL("https://github.com/USTC-Resource/USTC-Course","中科大课程资源","github资源"),
-        createURL("https://github.com/CoolPhilChen/SJTU-Courses","上交大课程资源","github资源")
+		createURL("https://github.com/CoolPhilChen/SJTU-Courses","上交大课程资源","github资源"),
+		createURL("https://www.pnglot.com/", "PNGs", "for free")
 	]
 };
 
