@@ -1,0 +1,25 @@
+/* 
+ *  页面初始样式
+ */
+
+
+/* 清除浏览器默认样式 */
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+/* 清除超链接标签<a>的默认下划线 */
+a{
+    text-decoration: none;
+
+     /* 解决超链接字体字体颜色继承问题 */
+     color: inherit;
+}
+
+/* 防止盒子之间的 垂直外边距重叠 问题和 高度塌陷 问题 */
+.clearfix:before, .clearfix:after{
+    content: "";
+    display: table;
+    clear: both;
+}
