@@ -15,11 +15,12 @@
     
     <style>
         html, body, #axSceneView {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-    }
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+        
     </style>
     <!-- ArcGIS for JS API 自定义脚本-->
     <script src="./index.js"></script>
@@ -29,11 +30,23 @@
     <!-- 初始页面样式 -->
     <link rel="stylesheet" href="./default-css/Initial.css">
 
-
     
 </head>
 <body>
     <!-- 地图容器 -->
     <div id="axSceneView"></div>
+
+    <div id="clock">
+        <b class="clock-core"></b>
+        <div id="clock-h">
+                <b></b>
+        </div>
+        <div id="clock-m">
+                <b></b>
+        </div>
+        <div id="clock-s"></div>
+        <div id="clock-mark"></div>
+    </div>
+
 </body>
 </html>
