@@ -8,10 +8,14 @@ function createURL(bURL, bNAME){
 
 // 链接集合
 var items_n_e = [
-    new createURL("MaySaying.html", "地图留言板"),
+    new createURL("note/note.html", "🌏 学识归档 🌏"),
+    new createURL("MaySaying.html", "🌏 地图留言板 🌏"),
     new createURL("#", ""),
     new createURL("https://g3.luciaz.me/", "Google"),
     new createURL("https://translate.google.cn/", "Translate"),
+    new createURL("Older/index.html", "个人网站(旧)入口1"),
+    new createURL("https://ngheizit.github.io/winner", "个人网站(旧)入口2"),
+    new createURL("https://ngheizit.github.io/win", "个人网站(旧)入口3"),
 ];
 var items_n_w = [
     new createURL("https://github.com/", "Github"),

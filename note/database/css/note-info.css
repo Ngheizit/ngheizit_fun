@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 489px;
+    border-right: 1px dotted #999;
+    padding: 5px;
+}
+hr{
+    height: 2px;
+    margin: 5px;
+    width: 200px;
+    background-color: #999
+}
+pre{
+    margin: 10px;
+    background-color: #444;
+    overflow: auto;
+    padding: 10px;
+    color: #eee;
+}
+p{
+    text-indent: 2em;
+    padding: 10px;
+}
+img{
+    margin: 10px 0;
+}
+.bigimg{
+    width: 480px;
+}

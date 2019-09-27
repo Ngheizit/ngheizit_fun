@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>配置ArcGIS Runtime SDK for Android</title>
+    
+    <link rel="stylesheet" href="./css/note-info.css">
+    <script src="../../default-js/up.js"></script>
+</head>
+<body>
+    <h2 id="title">& 配置ArcGIS Runtime SDK for Android</h2>
+    <hr>
+    <h3>0. 将项目Gradle存储库（Module:app）更新为Esri的Bintray Mavrn存储库URL</h3>
+    <pre>
+allprojects {
+    repositories {
+        ...
+        maven {
+            url 'https://esri.bintray.com/arcgis'
+        }
+    }
+}</pre>
+    <h3>1. 更新应用程序模块Gradle依赖项（Project:xxx），以包括适用于Android的ArcGIS Runtime SDK依赖项</h3>
+    <pre>
+dependencies {
+    ...
+    implementation 'com.esri.arcgisruntime:arcgis-android:100.6.0'
+}</pre>
+    <h3>2. 添加Java 8编译选项（Project:xxx）</h3>
+    <pre>
+android {
+    ...
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}</pre>
+    <h3>3. 在清单文件（AndroidManifest）中设置权限运行网络访问并指示应用程序使用OpenGL 2.0或更高版本</h3>
+    <pre>
+&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;uses-feature android:glEsVersion="0x00020000" android:required="true" /&gt;</pre>
+    <h3>4. 总结</h3>
+    <p>参考网址：<a href="https://developers.arcgis.com/labs/android/create-a-starter-app/" target="_block">ArcGIS Developers</a>；强烈建议使用 Android Studio 3 版本以上；</p>
+</body>
+</html>
