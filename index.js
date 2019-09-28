@@ -40,6 +40,8 @@ var items_s_e = [
     new createURL("http://www.w3school.com.cn/index.html", "W3School"),
     new createURL("http://www.android-studio.org/index.php/download/hisversion", "Android Studio China"),
     new createURL("https://developer.android.google.cn/", "Android Developer"),
+    new createURL("https://www.osgeo.cn/python_gdal_utah_tutorial/index.html", "Python GDAL课程笔记"),
+    new createURL("http://pcjericks.github.io/py-gdalogr-cookbook/index.html", "Python GDAL / OGR Cookbook"),
     new createURL("#", ""),
     new createURL("https://www.openstreetmap.org/", "Openstreetmap"),
     new createURL("http://webmap.cn/main.do?method=index", "全国地理信息资源目录服务系统"),
