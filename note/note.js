@@ -8,7 +8,8 @@ function createURL(bURL, bNAME){
 var items = [
     new createURL("./database/xf20190927_3.html", "$ ArcGIS Engine开发常见问题总结"),
     new createURL("./database/xf20190927_2.html", "$ 在VS中使用C#调用GDAL库的方式"),
-    new createURL("./database/xf20190927.html", "$ 配置ArcGIS Runtime SDK for Android")
+    new createURL("./database/xf20190927.html", "$ 配置ArcGIS Runtime SDK for Android"),
+    new createURL("./database/xf20190928.html", "$ 齐次坐标")
 ];
 
 
