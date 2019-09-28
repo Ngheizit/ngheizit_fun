@@ -31,7 +31,8 @@ var items_n_w = [
     new createURL("#", ""),
     new createURL("http://www.hebtu.edu.cn", "Hebei Normal University"),
     new createURL("https://www.12306.cn/", "12306"),
-    new createURL("https://www.pnglot.com/", "PNGs")
+    new createURL("https://www.pnglot.com/", "PNGs"),
+    new createURL("https://www.zamzar.com/convert/png-to-ico/", "PNG to icon")
 ];
 var items_s_e = [
     new createURL("https://unbug.github.io/codelf/", "Code Name Search"),
@@ -192,6 +193,71 @@ function Main(){
         view.watch("stationary", function(isStationary){
             showCoordinates(view.center);
         });
+
+        var ModuleList2 = document.createElement("div");
+        ModuleList2.style.fontFamily = "华文楷体";
+        ModuleList2.style.fontSize = "22px";
+        ModuleList2.className = "esri-widget esri-component";
+        ModuleList2.style.textAlign = "center";
+        var ModuleBox = document.createElement("div");
+        ModuleBox.className = "esri-editor__temp-wrapper";
+        // 控件 Header
+        var ModuleHeader = document.createElement("div");
+        ModuleHeader.className = "esri-basemap-gallery esri-widget esri-widget--panel-height-only";
+        var img = document.createElement("img");
+        img.src = "./default-img/infomation.jpg";
+        img.style.width = "100px";
+        img.style.marginTop = "10px";
+        var info = document.createElement("div");
+        info.innerHTML = "🏬 Studying from school"
+        info.style.textAlign = "center";
+        info.style.margin = "10px"; 
+        var info2 = document.createElement("div");
+        info2.innerHTML = "🐱‍👤 希浙 加油 ( •̀ ω •́ )y"
+        info2.style.textAlign = "center";
+        info2.style.margin = "10px"; 
+        var info3 = document.createElement("div");
+        info3.innerHTML = "🏩 河北师范大学资源与环境科学学院"
+        info3.style.textAlign = "center";
+        info3.style.margin = "10px"; 
+        var info4 = document.createElement("div");
+        info4.innerHTML = "🗺 Now: 河北石家庄; Home: 广东佛山"
+        info4.style.textAlign = "center";
+        info4.style.margin = "10px"; 
+        var info5 = document.createElement("a");
+        info5.style.display = "block";
+        info5.href = "https://github.com/Ngheizit"
+        info5.innerHTML = "👀 Github - Ngheizit"
+        info5.style.textAlign = "center";
+        info5.style.margin = "10px"; 
+        info5.style.color = "#007ACC";
+        info5.onmouseenter = function(){
+            info5.style.textDecoration = "underine";
+        };
+        info5.onmouseleave = function(){
+            info5.style.textDecoration = "none";
+        };
+        var info6 = document.createElement("div");
+        info6.innerHTML = "🖨 ngheizitgis@outlook.com";
+        info6.style.textAlign = "center";
+        info6.style.margin = "10px"; 
+
+
+
+        ModuleList2.appendChild(ModuleBox);
+        ModuleBox.appendChild(ModuleHeader);
+        ModuleHeader.appendChild(img);
+        ModuleHeader.appendChild(info);
+        ModuleHeader.appendChild(info2);
+        ModuleHeader.appendChild(info3);
+        ModuleHeader.appendChild(info4);
+        ModuleHeader.appendChild(info5);
+        ModuleHeader.appendChild(info6);
+        var expand_ModuleList2 = new Expand({
+            view: view,
+            content: ModuleList2
+        });
+        view.ui.add(expand_ModuleList2, "bottom-left");
 
     });
 }

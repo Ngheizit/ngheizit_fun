@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ArcGIS Engine开发常见问题总结</title>
+    
+    <link rel="stylesheet" href="./css/note-info.css">
+    <script src="../../default-js/up.js"></script>
+</head>
+<body>
+    <h2 id="title">& ArcGIS Engine开发常见问题总结</h2>
+    <hr>
+    <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+
+    <h3>0. 绑定ArcGIS Engine产品代码</h3>
+    <p>需在项目文件Program.cs中的Main()方法语句下的Application.Run(...)前添加下述代码：</p>
+    <pre>
+ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.Engine);</pre>
+
+    <h3>1. 项目相对位置定位(...\bin\Debug\)</h3>
+    <p>首相定位到项目调试的exe文件，然后再获得该文件所在的目录以实现项目目录定位</p>
+    <pre>
+string exe = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+string PATH_ENVIMENT = System.IO.Path.GetDirectoryName(exe);</pre>
+
+        <h3>2. 需注意 ESRI.ArcGIS.Carto 和 ESRI.ArcGIS.Geodatabase 的ILayer接口区别</h3>
+        <p>同时加到项目引用中</p>
+
+    <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+</body>
+</html>
