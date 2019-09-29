@@ -4,19 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>齐次坐标</title>
+    <title>SQL关系型数据库标准语言 - 数据类型</title>
     
     <link rel="stylesheet" href="./css/note-info.css">
     <script src="../../default-js/up.js"></script>
 </head>
 <body>
-    <h2 id="title">& 齐次坐标</h2>
+    <h2 id="title">& SQL关系型数据库标准语言 - 数据类型</h2>
     <hr>
     <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
 
-    <p>齐次坐标使用一下符号描述：(x, y, z, w)。</p>
-    <p>齐次坐标(x, y, z, w)等价于三维坐标(x/w, y/w, z/w)。</p>
-    <p>w的值必须大于等于0.如果w趋近于0，那么它所表示的点将趋近于无穷远，所以齐次坐标系中可以有无穷的概念</p>
+    <h3>数据类型及对应含义</h3>
+    <pre>
+// 长度为n的定长字符串
+CHAR(n)
+CHARCTER(n)
+
+// 最大长度为n的变长字符串
+VARCHAR(n)
+CHARCTERVARTING(n)
+
+// 字符串大对象
+CLOB
+
+// 二进制大对象
+BLOB
+
+// 长整型 - 4字节
+INT
+INTEGER
+
+// 短整型 - 2字节
+SMALLINT
+
+// 大整形 - 8字节
+BIGINT
+
+// 定点数，由p位数字（不包括符号、小数点）组成，小数后面有d位数字
+NUMERIC(p, d)
+
+// 同NUMERIC
+DECIMAL(p, d)
+DEC(p, d)
+
+// 取决于机器精度的单精度浮点型
+REAL
+
+// 取决于机器精度的双精度浮点型
+DOUBLE PRECISION
+
+// 可选精度的浮点数，精度至少为n为数字
+FLOAT(n)
+
+// 逻辑布尔量
+BOOLEAN
+
+// 日期，包含年、月、日，格式为YYYY-MM-DD
+DATE
+
+// 时间，包含一日的时、分、秒，格式为HH:MM:SS
+TIME
+
+// 时间戳类型
+TIMESTAMP
+
+// 时间间隔类型
+INTERVAL
+    </pre>
 
     <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 </body>
