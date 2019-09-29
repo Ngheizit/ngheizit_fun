@@ -104,8 +104,16 @@ function Main(){
                 ModuleItem.className = "esri-editor__feature-list-item";
                 ModuleItem.name = items[i].url;
                 ModuleItem.onclick = function(){
-                    ModuleShow.src = this.name;
+                    if(ModuleShow.src != ""){
+                        $("iframe").animate({
+                            opacity: "0"
+                        }, 0.1);
+                    }
                     ModuleShow.style.visibility = "visible";
+                    ModuleShow.src = this.name;
+                    $("iframe").animate({
+                        opacity: "1"
+                    });
                 }
                 var ModuleItemName = document.createElement("div");
                 ModuleItemName.className = "esri-editor__feature-list-name";
