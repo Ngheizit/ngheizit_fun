@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebGL 语法规范总结</title>
+    
+    <link rel="stylesheet" href="./css/note-info.css">
+    <script src="../../default-js/up.js"></script>
+</head>
+<body>
+    <h2 id="title">& WebGL 语法规范总结</h2>
+    <hr>
+    <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+
+<h3>-1. WebGL库</h3>
+<p><a href="https://github.com/Ngheizit/ngheizit_fun/tree/master/webgl/lib" target="_block">cuon-matrix.js、cuon-utils.js、webgl-debug.js、webgl-utils.js</a></p>
+
+<h3>0. 顶点着色器</h3>
+<pre>
+var VSHADER_SOURCE = 
+    'attribute vec4 a_Position; \n' +
+    'attribute float a_PointSize; \n' +
+    'void main(){ \n' +
+    '   gl_Position = a_Position; \n' + //设置坐标
+    '   gl_PointSize = a_PointSize; \n' + //设置尺寸
+    '} \n';
+</pre>
+
+<h3>1. 片元着色器</h3>
+<pre>
+var FSHADER_SOURCE = 
+    'precision mediump float; \n' +
+    'uniform vec4 u_FragColor; \n' +
+    'void main(){ \n' +
+    '   gl_FragColor = u_FragColor; \n' + //设置颜色
+    '} \n';
+</pre>
+
+<h3>2. 获取WebGL绘图上下文</h3>
+<pre>
+var gl = getWebGLContext(canvas);
+if(!gl){
+    console.log('Failed to get the rendering context for WebGL');
+    return;
+}
+</pre>
+
+<h3>3. 初始化着色器</h3>
+<pre>
+if(!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)){
+    console.log('Failed to get the rendering context for WebGL');
+    return;
+}
+</pre>
+<h3>4. 获得attribute变量的存储位置</h3>
+<pre>
+var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+if(a_Position < 0){
+    console.log('Failed to get the storage location of a_Position');
+    return;
+}
+var a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
+if(a_PointSize < 0){
+    console.log('Failed to get the sorage location of a_PointSize');
+    return;
+}
+// 设置attribute变量
+gl.vertexAttrib3f(a_Position, x, y, z);
+gl.vertexAttrib1f(a_PointSize, size);
+</pre>
+<h3>5. 获得uniform变量的存储位置</h3>
+<pre>
+var u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
+if(!u_FragColor){
+    console.log('Failed to get u_FragColor variable');
+    return;
+}
+// 设置uniform变量
+gl.uniform4f(u_FragColor, r, g, b, a);
+</pre>
+
+    <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebGL gl.drawArrays()方法与基本绘图</title>
+    
+    <link rel="stylesheet" href="./css/note-info.css">
+    <script src="../../default-js/up.js"></script>
+</head>
+<body>
+    <h2 id="title">& WebGL gl.drawArrays()方法与基本绘图</h2>
+    <hr>
+    <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+
+<h3>0. gl.drawArray()方法细节</h3>
+<pre>
+gl.drawArray(mode, first, count)
+// 执行顶点着色器，按照mode参数指定的方法绘制图形
+// 参数：   mode    指定绘制的方法
+//          first   指定从哪个顶点开始绘制（整数型）
+//          count   指定绘制需要用到多少个顶点（整数型）
+</pre>
+<h3>1. WebGL可以绘制的基本图形</h3>
+<pre>
+// <b>点</b>
+gl.POINTS
+// 一系列点，绘制在v0、v1、v2...处
+</pre>
+<pre>
+// <b>线段</b>
+gl.LINES
+// 一系列单独的线段，绘制在(v0, v1)、(v2, v3)、(v4, v5).....处，
+// 如果点的个数是奇数，最后一个点将被忽略
+</pre>
+<pre>
+// <b>线条</b>
+gl.LINE_STRIP
+// 一系列连接的线段，绘制在(v0, v1)、(v1, v2)、(v2, v3).....处，
+// 第1个点是第1条线段的起点，第2个点是第1条线段的终点和第2条线段的起点...
+// 第i(i>1)个点是第i-1条线段的终点和第i条线段的起点，其次类推，直至最后
+</pre>
+<pre>
+// <b>回路</b>
+gl.LINE_LOOP
+// 一系列连接的线段
+// 与gl.LINE_STRIP绘制的线条相比，增加了一条从最后一点到第一个点的线段
+// (v0, v1)、(v1, v2)、...、(vn, v0)
+</pre>
+<pre>
+// <b>三角形</b>
+gl.TRIANGLES
+// 一系列单独的三角形
+// (v0, v1, v2)、(v3, v4, v5).....
+// 如果点数不是3的倍数，最后一个剩下的一个或两个将被忽略
+</pre>
+<pre>
+// <b>三角带</b>
+gl.TRIANGLE_STRIP
+// 一系列条带状的三角形
+// (v0, v1, v2)、(v2, v1, v3)、(v2, v3, v4)
+// 绘制按照逆时针顺序
+// 前三个点构成了第一个第1个三角形，从第2个点开始的三个点构成了第2个三角形
+// 三角形与前一个三角形共享一条边
+</pre>
+<pre>
+// <b>三角扇</b>
+gl.TRIANGLE_FAN
+// 一系列三角形组成的类似扇形的图形
+// 前三个点构成了第1个三角形，接下来的有一个点和前一个三角形的最后一条便组成接下来的一个三角形
+// (v0, v1,v2)、(v0, v2, v3)、(v0, v3, v4).....
+</pre>
+
+    <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+</body>
+</html>

@@ -6,6 +6,9 @@ function createURL(bURL, bNAME){
 	return oURL;
 }
 var items = [
+    new createURL("./database/xf20190929_3.html", "$ WebGL gl.drawArrays()方法与基本绘图"),
+    new createURL("./database/xf20190929_2.html", "$ WebGL 使用缓冲区对象的步骤"),
+    new createURL("./database/xf20190929.html", "$ WebGL 语法规范总结"),
     new createURL("./database/xf20190928.html", "$ SQL关系型数据库标准语言 - 数据类型"),
     new createURL("./database/xf20190927_3.html", "$ ArcGIS Engine开发常见问题总结"),
     new createURL("./database/xf20190927_2.html", "$ 在VS中使用C#调用GDAL库的方式"),
