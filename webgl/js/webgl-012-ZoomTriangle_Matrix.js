@@ -19,9 +19,7 @@ var Tx = 0.5, Ty = 0.5, Tz = 0.0;
 // 缩放参数
 var Sx = 1.0, Sy = 1.5, Sz = 1.0;
 
-window.onload = function(){
-    this.Main();
-}
+
 
 function Main(){
 

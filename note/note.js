@@ -6,6 +6,7 @@ function createURL(bURL, bNAME){
 	return oURL;
 }
 var items = [
+    new createURL("./database/xf20191005.html", "$ Android 部分依赖项配置"),
     new createURL("./database/xf20190930_3.html", "$ WebGL gl.drawArrays()方法与基本绘图"),
     new createURL("./database/xf20190930_2.html", "$ WebGL 使用缓冲区对象的步骤"),
     new createURL("./database/xf20190930.html", "$ WebGL 语法规范总结"),

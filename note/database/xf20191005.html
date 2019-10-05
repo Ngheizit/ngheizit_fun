@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Android 部分依赖项配置</title>
+    
+    <link rel="stylesheet" href="./css/note-info.css">
+    <script src="../../default-js/up.js"></script>
+</head>
+<body>
+    <h2 id="title">& Android 部分依赖项配置</h2>
+    <hr>
+    <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+
+<h3>1. Butter Knife</h3>
+<p>build.gradle(Module: app)</p>
+<pre>
+// apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+android {
+    ...
+    // Butterknife requires Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+    
+dependencies {
+    ...
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+}
+</pre>
+<p>build.gradle(Project: xxx)</p>
+<pre>
+buildscript {
+    ...
+    dependencies {
+        ...
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.0'
+    }
+}
+</pre>
+<p>使用方式</p>
+<pre>
+public class xxxActivity extends AppCompatActivity {
+    @BindView(R.id.xxx) XXX xxx
+    @BindView(R.id.xxx) XXX xxx
+    ...
+    @OnCilck({
+        R.id.xxx, R.id.xxx, ...
+    })public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case: R.id.xxx:
+                ...
+                break;
+            case: R.id.xxx:
+                ...
+                break;
+            ...
+        }
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tian_di_tu);
+        ButterKnife.bind(this);
+        ...
+    }
+}
+</pre>
+<h3>2. OkHTTP 网络框架</h3>
+<p>build.gradle(Module: app)</p>
+<pre>
+dependencies {
+    ...
+    implementation 'com.zhy:okhttputils:2.6.2'
+    implementation("com.squareup.okhttp3:okhttp:4.2.0")
+}
+</pre>
+<p>使用方式</p>
+<pre>
+OkHttpUtils.get()
+    .url("[查询网址]")
+    .addParams("[key]", "[value]")
+    .addParams("[key]", "[value]")
+    ...
+    .build()
+    .execute(new StringCallback() {
+        @Override
+        public void onError(Call call, Exception e, int id) {
+            // e.printStackTrace();
+        }
+        @Override
+        public void onResponse(String response, int id) {
+            // ...
+        }
+    }
+</pre>
+
+    <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+</body>
+</html>
