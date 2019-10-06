@@ -26,10 +26,31 @@
         <script src="./note.js"></script>    
         
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+
+        <!-- 表单样式 -->
+        <script src="./form.js"></script>
+        <link rel="stylesheet" href="./form.css">
    
 </head>
 <body>
     <!-- 地图容器 -->
     <div id="axSceneView"></div>
+
+
+    <form id="form" class="form-style-4" action="MAILTO:ngheizitwu@outlook.com" method="post">
+        <label for="name">
+        <span>Enter Your Name</span><input type="text" name="name" required="true" />
+        </label>
+        <label for="email">
+        <span>Email Address</span><input type="email" name="email" required="true" />
+        </label>
+        <label for="title">
+        <span>Short Subject</span><input type="text" name="title" required="true" />
+        </label>
+        <label for="content">
+        <span>Message to Me</span><textarea name="content" onkeyup="adjust_textarea(this)" required="true"></textarea>
+        </label>
+        <span> </span><input type="submit" value="Send Letter" />
+    </form>
 </body>
 </html>

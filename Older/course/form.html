@@ -4,80 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>表单操作</title>
+    <title>Document</title>
 
-    <style>
-        body{
-            padding-left: 25%;
-            padding-right: 25%;
+    <style type="text/css">
+        .form-style-4{
+            width: 450px;
+            font-size: 16px;
+            background: #495C70;
+            padding: 30px 30px 15px 30px;
+            border: 5px solid #53687E;
+            
+        }
+        .form-style-4 input[type=submit],
+        .form-style-4 input[type=button],
+        .form-style-4 input[type=text],
+        .form-style-4 input[type=email],
+        .form-style-4 textarea,
+        .form-style-4 label
+        {
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 16px;
+            color: #fff;
+        
+        }
+        .form-style-4 label {
+            display:block;
+            margin-bottom: 10px;
+        }
+        .form-style-4 label > span{
+            display: inline-block;
+            float: left;
+            width: 150px;
+        }
+        .form-style-4 input[type=text],
+        .form-style-4 input[type=email] 
+        {
+            background: transparent;
+            border: none;
+            border-bottom: 1px dashed #83A4C5;
+            width: 275px;
+            outline: none;
+            padding: 0px 0px 0px 0px;
+            font-style: italic;
+        }
+        .form-style-4 textarea{
+            font-style: italic;
+            padding: 0px 0px 0px 0px;
+            background: transparent;
+            outline: none;
+            border: none;
+            border-bottom: 1px dashed #83A4C5;
+            width: 275px;
+            overflow: hidden;
+            resize:none;
+            height:20px;
+        }
+        
+        .form-style-4 textarea:focus, 
+        .form-style-4 input[type=text]:focus,
+        .form-style-4 input[type=email]:focus,
+        .form-style-4 input[type=email] :focus
+        {
+            border-bottom: 1px dashed #D9FFA9;
+        }
+        
+        .form-style-4 input[type=submit],
+        .form-style-4 input[type=button]{
+            background: #576E86;
+            border: none;
+            padding: 8px 10px 8px 10px;
+            border-radius: 5px;
+            color: #A8BACE;
+        }
+        .form-style-4 input[type=submit]:hover,
+        .form-style-4 input[type=button]:hover{
+        background: #394D61;
         }
     </style>
-
+    <script type="text/javascript">
+        //auto expand textarea
+        function adjust_textarea(h) {
+            h.style.height = "20px";
+            h.style.height = (h.scrollHeight)+"px";
+        }
+    </script>
 </head>
 <body>
     
-    <fieldset>
-        <legend>信息填写</legend>
-        <form action="MAILTO:ngheizitwu@outlook.com" method="POST" enctype="text/plain">
-            Username: <input type="text" name="username" id="input_username"><br />
-            Passworld: <input type="password" name="password" id="input_password"><br />
-            Sex: 
-            <input type="radio" name="sex" id="input_male" checked><label for="input_male">Male</label>
-            <input type="radio" name="sex" id="input_female"><label for="input_female">Female</label> <br />
-            Season:
-            <input type="checkbox" name="season" id="input_spring"><label for="input_spring">Spring</label>
-            <input type="checkbox" name="season" id="input_summer"><label for="input_summer">Summer</label>
-            <input type="checkbox" name="season" id="input_antumn"><label for="input_antumn">Autumn</label>
-            <input type="checkbox" name="season" id="input_winter"><label for="input_winter">Winter</label> <br />
-            Land:
-            <Select name="land" size="1">
-                <option value="Eurasian">Eurasian continent</option>
-                <option value="Antarctic">Antarctic continent</option>
-                <option value="African">African continent</option>
-                <option value="American">American continent</option>
-            </Select><br />
-            Messagre board:<br />
-            <textarea name="info" id="input_info" cols="50" rows="4"></textarea><br>
-            Upload file:
-            <input type="file" name="file" id="input_file"><br />
+    <form id="form" class="form-style-4" action="MAILTO:ngheizitwu@outlook.com" method="post">
+        <label for="name">
+        <span>Enter Your Name</span><input type="text" name="name" required="true" />
+        </label>
+        <label for="email">
+        <span>Email Address</span><input type="email" name="email" required="true" />
+        </label>
+        <label for="title">
+        <span>Short Subject</span><input type="text" name="title" required="true" />
+        </label>
+        <label for="content">
+        <span>Message to Me</span><textarea name="content" onkeyup="adjust_textarea(this)" required="true"></textarea>
+        </label>
+        <span> </span><input type="submit" value="Send Letter" />
+    </form>
 
-            <fieldset>
-                    <legend>HTML5</legend>
-                    Sea:
-                    <input list="sea">
-                    <datalist id="sea">
-                        <option value="The Pacific Ocean">
-                        <option value="Atlantic">
-                        <option value="Indian Ocean">
-                        <option value="Arctic Ocean">
-                    </datalist><br />
-                    Lucky number (between 0 and 100):
-                    <input type="number" name="quantity" min="0" max="100"><br />
-                    Set date:
-                    <input type="date" name="date"><br />
-                    Set date2:
-                    <input type="month" name="month"><br />
-                    Set date3:
-                    <input type="week" name="week"><br />
-                    Select color:
-                    <input type="color" name="color"><br />
-                    Set range:
-                    <input type="range" name="range" min="0" max="100"><br />
-                    Set time:
-                    <input type="time" name="time"><br />
-                    Set datetime:
-                    <input type="datetime" name="datetime"><br />
-                    Set datetime2:
-                    <input type="datetime-local" name="datetime"><br />
-                    Set email:
-                    <input type="email" name="email"><br />
-                    Set Search:
-                    <input type="search" name="search">
-            </fieldset>
-
-            <input type="submit" value="S u b m i t">
-            <input type="reset" value="R e s e t"><br />
-        </form>
-    </fieldset>
 </body>
 </html>

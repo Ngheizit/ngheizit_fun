@@ -64,6 +64,7 @@ function Main(){
 
 
         var ModuleList = document.createElement("div");
+        ModuleList.style.opacity = "0.9";
         ModuleList.style.fontFamily = "华文楷体";
         ModuleList.style.fontSize = "22px";
         ModuleList.className = "esri-widget esri-component";
@@ -82,11 +83,11 @@ function Main(){
         var ModuleSeletor = document.createElement("div");
         ModuleSeletor.className = "esri-editor__mode-selection";
         ModuleSeletor.style.overflow = "auto";
-        ModuleSeletor.style.maxHeight = "500px";
+        ModuleSeletor.style.maxHeight = "350px";
         function createModuleItem(){
             var ModuleShow = document.createElement("iframe");
             ModuleShow.style.backgroundColor = "#fff";
-            ModuleShow.style.height = "600px";
+            ModuleShow.style.height = "550px";
             ModuleShow.style.width = "520px";
             ModuleShow.frameborder = "0";
             ModuleShow.style.visibility = "hidden";
@@ -116,7 +117,7 @@ function Main(){
                     ModuleShow.style.visibility = "visible";
                     ModuleShow.src = this.name;
                     $("iframe").animate({
-                        opacity: "1"
+                        opacity: "0.8"
                     });
                 }
                 var ModuleItemName = document.createElement("div");
@@ -147,7 +148,23 @@ function Main(){
         ModuleHeader.appendChild(ModuleHeader_text);
         ModuleBox.appendChild(ModuleContent);
         ModuleContent.appendChild(ModuleSeletor);
-        view.ui.add(btn_back_home, "bottom-left");
+        btn_back_home.style.opacity = "0.7";
+        view.ui.add(btn_back_home, "bottom-right");
 
+        var form = document.getElementById("form");
+        form.style.opacity = "0.3";
+        form.onmouseenter = function() {
+            $("form").animate({
+                opacity: "0.8"
+            });
+        }
+        form.onmouseleave = function() {
+            $("form").animate({
+                opacity: "0.3"
+            });
+        }
+        view.ui.add(form, "bottom-left");
     });
+
+
 }
