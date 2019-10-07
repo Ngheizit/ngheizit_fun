@@ -6,6 +6,7 @@ function createURL(bURL, bNAME){
 	return oURL;
 }
 var items = [
+    new createURL("./database/xf20191007.html", "$ WebGL Matrix4对象所支持的方法和属性"),
     new createURL("./database/xf20191005.html", "$ Android 部分依赖项配置"),
     new createURL("./database/xf20190930_3.html", "$ WebGL gl.drawArrays()方法与基本绘图"),
     new createURL("./database/xf20190930_2.html", "$ WebGL 使用缓冲区对象的步骤"),
@@ -64,7 +65,7 @@ function Main(){
 
 
         var ModuleList = document.createElement("div");
-        ModuleList.style.opacity = "0.9";
+        // ModuleList.style.opacity = "0.9";
         ModuleList.style.fontFamily = "华文楷体";
         ModuleList.style.fontSize = "22px";
         ModuleList.className = "esri-widget esri-component";
@@ -117,7 +118,7 @@ function Main(){
                     ModuleShow.style.visibility = "visible";
                     ModuleShow.src = this.name;
                     $("iframe").animate({
-                        opacity: "0.8"
+                        opacity: "0.95"
                     });
                 }
                 var ModuleItemName = document.createElement("div");

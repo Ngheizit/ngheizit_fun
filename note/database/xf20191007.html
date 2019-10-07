@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebGL Matrix4对象所支持的方法和属性</title>
+    
+    <link rel="stylesheet" href="./css/note-info.css">
+    <script src="../../default-js/up.js"></script>
+</head>
+<body>
+    <h2 id="title">& WebGL Matrix4对象所支持的方法和属性</h2>
+    <hr>
+    <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+<pre>
+方法和属性名称                              描述
+￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+Matrix4.setIdentity()           将Matrix4实例初始化为单位矩阵
+
+Matrix4.setTranslate(x,y,z)     将Matrix4实例设置为平移变换矩阵
+                                在X、Y、Z轴上平移距离为x、y、z
+
+Matrix4.setRotate(angle,x,y,z)  将Matrix4实例设置为旋转变换矩阵
+                                旋转角度：angle；旋转轴：(x,y,z)
+
+Matrix4.setScale(x,y,z)         将Matrix4实例设置为缩放变换矩阵
+                                在x、y、z轴上缩放因子为x、y、z
+
+Matrix4.translate(x,y,z)        将Matrix4实例乘以平移变换矩阵
+
+Matrix4.rotate(x,y,z)           将Matrix4实例乘以旋转变换矩阵
+
+Matrix4.scale(x,y,z)            将Matrix4实例乘以缩放变换矩阵
+
+Matrix4.set(m)                  更改Matrix4实例，m为Matrix4实例
+
+Matrix4.elements                类型化数组（Float32Array）
+                                包含了Matrix4实例的矩阵元素
+</pre>
+    
+
+    <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+</body>
+</html>

@@ -1,9 +1,9 @@
 // 顶点着色器
 var VSHADER_SOURCE = 
     'attribute vec4 a_Position; \n' +
-    'uniform mat4 u_xformMatrix; \n' +
+    'uniform mat4 u_ModelMaxtrix; \n' +
     'void main() { \n' +
-    '   gl_Position = u_xformMatrix * a_Position; \n' +
+    '   gl_Position = u_ModelMaxtrix * a_Position; \n' +
     '} \n';
 
 // 片元着色器
@@ -12,12 +12,7 @@ var FSHADER_SOURCE =
 '   gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0); \n' + //设置颜色
 '} \n';
 
-// 旋转角度
-var ANGLE = 90.0;
-// 平移距离
-var Tx = 0.5, Ty = 0.5, Tz = 0.0;
-// 缩放参数
-var Sx = 1.0, Sy = 1.5, Sz = 1.0;
+
 
 window.onload = function(){
     this.Main();
@@ -45,23 +40,36 @@ function Main(){
     var n = initVertexBuffers(gl);
 
     // 创建旋转举证
-    var radian = Math.PI * ANGLE / 180.0; // 角度转弧度
-    var cosB = Math.cos(radian), sinB = Math.sin(radian);
-    // 注意WebGL中的矩阵是列主序的
-    var xformMatrix = new Float32Array([
-        Sx, 0.0, 0.0, 0.0,
-        0.0, Sy, 0.0, 0.0,
-        0.0, 0.0, Sz, 0.0,
-        0.0, 0.0, 0.0, 1.0
-    ]);
+    // var radian = Math.PI * ANGLE / 180.0; // 角度转弧度
+    // var cosB = Math.cos(radian), sinB = Math.sin(radian);
+    // // 注意WebGL中的矩阵是列主序的
+    // var xformMatrix = new Float32Array([
+    //     cosB, sinB, 0.0, 0.0,
+    //     -sinB, cosB, 0.0, 0.0,
+    //     0.0, 0.0, 1.0, 0.0,
+    //     0.0, 0.0, 0.0, 1.0
+    // ]);
+    // 为旋转矩阵创建Matrix4对象
+    var modelMatrix = new Matrix4();
+    
+    // 计算模型矩阵
+    var ANGLE = 60.0; // 旋转角
+    var Tx = 0.5; // 平移距离
+    // 先平移后旋转
+    modelMatrix.setRotate(ANGLE, 0, 0, 1); // 设置模型矩阵为旋转矩阵
+    modelMatrix.translate(Tx, 0, 0); // 将模型矩阵乘以平行矩阵
+    // 先旋转后平移
+    // modelMatrix.setTranslate(Tx, 0, 0);
+    // modelMatrix.rotate(ANGLE, 0, 0, 1);
+    
 
     // 将旋转举证传输给顶点着色器
-    var u_xformMatrix = gl.getUniformLocation(gl.program, 'u_xformMatrix');
-    if(!u_xformMatrix){
-        console.log('Failed to get u_xformMatrix variable');
+    var u_ModelMaxtrix = gl.getUniformLocation(gl.program, 'u_ModelMaxtrix');
+    if(!u_ModelMaxtrix){
+        console.log('Failed to get u_ModelMaxtrix variable');
         return;
     }
-    gl.uniformMatrix4fv(u_xformMatrix, false, xformMatrix);
+    gl.uniformMatrix4fv(u_ModelMaxtrix, false, modelMatrix.elements);
 
     // 设置背景色
     gl.clearColor(0.0, 0.0, 0.0, 1.0);

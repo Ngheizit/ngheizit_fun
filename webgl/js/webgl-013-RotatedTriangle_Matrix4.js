@@ -14,10 +14,6 @@ var FSHADER_SOURCE =
 
 // 旋转角度
 var ANGLE = 90.0;
-// 平移距离
-var Tx = 0.5, Ty = 0.5, Tz = 0.0;
-// 缩放参数
-var Sx = 1.0, Sy = 1.5, Sz = 1.0;
 
 window.onload = function(){
     this.Main();
@@ -47,13 +43,17 @@ function Main(){
     // 创建旋转举证
     var radian = Math.PI * ANGLE / 180.0; // 角度转弧度
     var cosB = Math.cos(radian), sinB = Math.sin(radian);
-    // 注意WebGL中的矩阵是列主序的
-    var xformMatrix = new Float32Array([
-        Sx, 0.0, 0.0, 0.0,
-        0.0, Sy, 0.0, 0.0,
-        0.0, 0.0, Sz, 0.0,
-        0.0, 0.0, 0.0, 1.0
-    ]);
+    // // 注意WebGL中的矩阵是列主序的
+    // var xformMatrix = new Float32Array([
+    //     cosB, sinB, 0.0, 0.0,
+    //     -sinB, cosB, 0.0, 0.0,
+    //     0.0, 0.0, 1.0, 0.0,
+    //     0.0, 0.0, 0.0, 1.0
+    // ]);
+    // 为旋转矩阵创建Matrix4对象
+    var xformMatrix = new Matrix4();
+    // 将xformMatrix设置为旋转矩阵
+    xformMatrix.setRotate(ANGLE, 0, 0, 1);
 
     // 将旋转举证传输给顶点着色器
     var u_xformMatrix = gl.getUniformLocation(gl.program, 'u_xformMatrix');
@@ -61,7 +61,7 @@ function Main(){
         console.log('Failed to get u_xformMatrix variable');
         return;
     }
-    gl.uniformMatrix4fv(u_xformMatrix, false, xformMatrix);
+    gl.uniformMatrix4fv(u_xformMatrix, false, xformMatrix.elements);
 
     // 设置背景色
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
