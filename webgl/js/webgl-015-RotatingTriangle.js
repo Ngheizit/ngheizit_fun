@@ -92,6 +92,7 @@ function initVertexBuffers(gl){
 function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
     // 设置旋转矩阵
     modelMatrix.setRotate(currentAngle, 0, 0, 1);
+    modelMatrix.translate(0.35, 0, 0)
 
     // 将旋转矩阵传输给顶点着色器
     gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
