@@ -7,47 +7,56 @@
     <title>Document</title>
 
     <style type="text/css">
-        .form-style-4{
+
+        /* form标签整体样式 */
+        .form{
             width: 450px;
             font-size: 16px;
             background: #495C70;
+
+            /* 盒子模型 */
             padding: 30px 30px 15px 30px;
-            border: 5px solid #53687E;
-            
+            border: 5px solid #53687E; /* 边框样式 */
         }
-        .form-style-4 input[type=submit],
-        .form-style-4 input[type=button],
-        .form-style-4 input[type=text],
-        .form-style-4 input[type=email],
-        .form-style-4 textarea,
-        .form-style-4 label
+
+        /* 指定input标签样式 */
+        .form input[type=submit],
+        .form input[type=button],
+        .form input[type=text],
+        .form input[type=email],
+        .form textarea,
+        .form label
         {
+            /* 字体家族 */
             font-family: Georgia, "Times New Roman", Times, serif;
             font-size: 16px;
             color: #fff;
         
         }
-        .form-style-4 label {
+
+        /* label标记标签样式 */
+        .form label {
             display:block;
             margin-bottom: 10px;
         }
-        .form-style-4 label > span{
-            display: inline-block;
+        /* label文本样式 */
+        .form label > span{
+            display: block;
             float: left;
             width: 150px;
         }
-        .form-style-4 input[type=text],
-        .form-style-4 input[type=email] 
+        .form input[type=text],
+        .form input[type=email] 
         {
             background: transparent;
-            border: none;
-            border-bottom: 1px dashed #83A4C5;
+            border: none; /* 去除input标签默认边框样式 */
+            border-bottom: 1px dashed #83A4C5; /* 设置底部边框样式 */
             width: 275px;
-            outline: none;
+            outline: none; /* 去除焦点下的强调边框 */
             padding: 0px 0px 0px 0px;
             font-style: italic;
         }
-        .form-style-4 textarea{
+        .form textarea{
             font-style: italic;
             padding: 0px 0px 0px 0px;
             background: transparent;
@@ -60,29 +69,31 @@
             height:20px;
         }
         
-        .form-style-4 textarea:focus, 
-        .form-style-4 input[type=text]:focus,
-        .form-style-4 input[type=email]:focus,
-        .form-style-4 input[type=email] :focus
+        /* 焦点状态下的样式 */
+        .form textarea:focus, 
+        .form input[type=text]:focus,
+        .form input[type=email]:focus,
+        .form input[type=email] :focus
         {
             border-bottom: 1px dashed #D9FFA9;
         }
         
-        .form-style-4 input[type=submit],
-        .form-style-4 input[type=button]{
+        /* 表单提交按钮样式 */
+        .form input[type=submit]{
             background: #576E86;
             border: none;
             padding: 8px 10px 8px 10px;
             border-radius: 5px;
             color: #A8BACE;
         }
-        .form-style-4 input[type=submit]:hover,
-        .form-style-4 input[type=button]:hover{
+        
+        /* 鼠标触碰样式 */
+        .form input[type=submit]:hover{
         background: #394D61;
         }
     </style>
     <script type="text/javascript">
-        //auto expand textarea
+        // 文本超行自动换行事件
         function adjust_textarea(h) {
             h.style.height = "20px";
             h.style.height = (h.scrollHeight)+"px";
@@ -91,7 +102,7 @@
 </head>
 <body>
     
-    <form id="form" class="form-style-4" action="MAILTO:ngheizitwu@outlook.com" method="post">
+    <form id="form" class="form" action="MAILTO:ngheizitwu@outlook.com" method="post">
         <label for="name">
         <span>Enter Your Name</span><input type="text" name="name" required="true" />
         </label>
