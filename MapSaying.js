@@ -5,7 +5,8 @@ window.onload = function(){
 function Main(){
     require(["esri/views/MapView", 
             "esri/WebMap",
-            "esri/widgets/Editor"], function(MapView, WebMap,Editor) {
+            "esri/widgets/Editor",
+            "esri/widgets/Bookmarks"], function(MapView, WebMap,Editor, Bookmarks) {
         
         // black blue green yellow purple red  orange
 
@@ -22,12 +23,34 @@ function Main(){
 
         // 小部件：编辑器
         view.when(function(){
+            var zoom_widget = document.getElementsByClassName("esri-component esri-zoom esri-widget")[0];
+            zoom_widget.remove();
             view.popup.autoOpenEnabled = true; // disable popups
             // Create the Editor
             var editor = new Editor({
                 view: view
             });
-            view.ui.add(editor, "top-right");
+            var bookmarks = new Bookmarks({
+                view: view,
+                editingEnabled: false
+            });
+            if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+                var eExpand = new Expand({
+                    view: view,
+                    content: editor,
+                    expanded: false
+                });
+                view.ui.add(eExpand, "top-right");
+                var bkExpand = new Expand({
+                    view: view,
+                    content: bookmarks,
+                    expanded: false
+                });
+                view.ui.add(bkExpand, "top-right");
+            } else {
+                view.ui.add(editor, "top-right");
+                view.ui.add(bookmarks, "top-right");
+            };
             
         });
 
