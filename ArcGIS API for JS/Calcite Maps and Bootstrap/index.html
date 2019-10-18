@@ -25,6 +25,7 @@
     <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark">
         <!-- Menu 菜单 -->
         <div class="dropdown calcite-dropdown calcite-text-dark calcite-bg-light" role="presentation">
+            <!-- 显示/关闭菜单按钮 -->
             <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="calcite-dropdown-toggle">
                     <span class="sr-only">Toggle dropdown menu</span>
@@ -34,26 +35,25 @@
                     <span></span>
                 </div>
             </a>
+            <!-- 菜单项 -->
             <ul class="dropdown-menu">
-                <li class="active">
-                    <a href="#mapTab" class="hidden-md hidden-lg" aria-controls="mapTab" role="tab" data-toggle="tab">Map</a>
-                </li>
+                <li class="active"> <a href="#mapTab" class="hidden-md hidden-lg" aria-controls="mapTab" role="tab" data-toggle="tab">2D 视图</a></li>
+                <li> <a href="#sceneTab" class="hidden-md hidden-lg" aria-controls="sceneTab" role="tab" data-toggle="tab">3D 视图</a> </li>
+                <!-- 底图选择 -->
                 <li>
-                    <a href="#sceneTab" class="hidden-md hidden-lg" aria-controls="sceneTab" role="tab" data-toggle="tab">Scene</a>
+                    <a role="button" data-target="#panelBasemaps" aria-haspopup="true">
+                        <span class="glyphicon glyphicon-th-large"></span>底图选择
+                    </a>
                 </li>
+                <!--  -->
                 <li>
-                    <a role="button" data-toggle="#panelBasemaps" aria-haspopup="true">
-                        <span class="glphicon glyphicon-th-large"></span>Basemap
+                    <a role="button" data-target="#panelSettings" aria-haspopup="true">
+                        <span class="glyphicon glyphicon-cog"></span>基础设置
                     </a>
                 </li>
                 <li>
-                    <a role="button" data-toggle="#panelSettings" aria-haspopup="true">
-                        <span class="glphicon glyphicon-cog"></span>Settings
-                    </a>
-                </li>
-                <li>
-                    <a role="button" data-toggle="#calciteToggleNavbar" aria-haspopup="true">
-                        <span class="glphicon glyphicon-fullscreen"></span>Full Map
+                    <a role="button" id="calciteToggleNavbar" aria-haspopup="true">
+                        <span class="glyphicon glyphicon-fullscreen"></span>全屏
                     </a>
                 </li>
             </ul>
@@ -67,13 +67,10 @@
         <!-- Nav: 导航 -->
         <ul class="nav navbar-nav calcite-nav">
             <li class="active">
-                <a id="mapNav" href="#mapTab" class="hidden-xs hidden-sm" aria-controls="mapTab" aria-expanded="true" role="tab" data-toggle="tab" data-tooltip="tip" title="2D View" data-placement="buttom">Map</a>
+                <a id="mapNav" href="#mapTab" class="hidden-xs hidden-sm" aria-controls="mapTab" aria-expanded="true" role="tab" data-toggle="tab" data-tooltip="tip" title="2D View" data-placement="buttom">2D 视图</a>
             </li>
             <li>
-                <a id="sceneNav" href="#sceneTab" class="hidden-xs hidden-sm" aria-controls="sceneTab" role="tab" data-toggle="tab" data-tooltip="tip" title="3D View" data-placement="buttom">Scene</a>
-            </li>
-            <li>
-                <div class="calcite-navbar-search calcite-search-expander"><div id="searchWidgetDiv"></div></div>
+                <a id="sceneNav" href="#sceneTab" class="hidden-xs hidden-sm" aria-controls="sceneTab" role="tab" data-toggle="tab" data-tooltip="tip" title="3D View" data-placement="buttom">3D 视图</a>
             </li>
         </ul>
     </nav>
@@ -91,6 +88,92 @@
     </div>
 
     <!-- Panels 功能板块 -->
-    
+    <div class="calcite-panels calcite-panels-right calcite-text-light calcite-bg-dark panel-group">
+        <!-- 底图选择板块 -->
+        <div id="panelBasemaps" class="panel collapse">
+            <div id="headingBasemaps" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a href="#collapseBasemaps" class="panel-toggle collapsed" role="button" data-toggle="collapse" aria-controls="collapseBasemaps" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                        <span class="panel-label">底图选择</span>
+                    </a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps">
+                        <span class="esri-icon esri-icon-close" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+            <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
+                <div class="panel-body"><div id="axBasemapPanel"></div></div>
+            </div>
+        </div>
+        <!-- 基础设置 -->
+        <div id="panelSettings" class="panel panel-map collapse">
+            <div id="headingSettings" class="panel-heading">
+                <div class="panel-title">
+                    <a href="#collapseSettings" class="panel-toggle" role="button" data-toggle="collapse" data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseSettings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        <span class="panel-label">设置</span>
+                    </a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSettings">
+                        <span class="esri-icon esri-icon-close" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+            <div id="collapseSettings" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSettings">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <!-- 主题 -->
+                        <div class="form-group">
+                            <label for="settingsTheme" class="col-xs-3 control-label">主题</label>
+                            <div class="col-xs-9">
+                                <select id="settingsTheme" class="form-control">
+                                    <option value="calcite-dark" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-dark" selected>Calcite Dark</option>
+                                    <option value="calcite-light" data-textcolor="calcite-text-dark" data-bgcolor="calcite-bg-light">Calcite Light</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 颜色 -->
+                        <div class="form-group">
+                            <label for="settingsColor" class="col-xs-3 control-label">颜色</label>
+                            <div class="col-xs-9">
+                                <select id="settingsColor" class="form-control">
+                                    <option value="" data-theme="calcite-theme-light">Calcite Default</option>
+                                    <option value="calcite-bgcolor-dark-blue" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Dark Blue</option>
+                                    <option value="calcite-bgcolor-dark-green" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Dark Green</option>
+                                    <option value="calcite-bgcolor-dark-brown" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Dark Brown</option>
+                                    <option value="calcite-bgcolor-dark-red" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Dark Red</option>
+                                    <option value="calcite-bgcolor-darkest-grey" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Darkest Grey</option>
+                                    <option value="calcite-bgcolor-lightest-grey" data-textcolor="calcite-text-dark" data-bgcolor="calcite-bg-custom">Calcite Lightest Grey</option>
+                                    <option value="calcite-bgcolor-blue-75" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Blue 75%</option>
+                                    <option value="calcite-bgcolor-black-75" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Black 75%</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 控件 -->
+                        <div class="form-group">
+                            <label for="settingsWidgets" class="col-xs-3 control-label">Widgets</label>
+                            <div class="col-xs-9">
+                                <select id="settingsWidgets" class="form-control">
+                                    <option value="calcite-widgets-dark">Calcite Dark</option>
+                                    <option value="calcite-widgets-light" selected>Calcite Light</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 布局 -->
+                        <div class="form-group">
+                            <label for="settingsLayout" class="col-xs-3 control-label">Layout</label>
+                            <div class="col-xs-9">
+                                <select id="settingsLayout" class="form-control">
+                                    <option value="calcite-nav-top" data-nav="navbar-fixed-top" selected>Top</option>
+                                    <option value="calcite-nav-bottom" data-nav="navbar-fixed-bottom">Bottom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
