@@ -82,7 +82,7 @@ function Main(){
         // 地图加载
         var scene = new WebScene({
             portalItem: {
-                id: "aea83120c07947f4b5305ffc499fd08b"
+                id: "81d1016c04ca4513b09995304a2731c4"
               }
         });
         var view = new SceneView({
