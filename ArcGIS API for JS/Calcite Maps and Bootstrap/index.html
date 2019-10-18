@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>网页框架</title>
+
+    <!-- Calcite Bookstrap and Calcite Map -->
+    <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-bootstrap.min-v0.8.css" />
+    <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-arcgis-4.x.min-v0.8.css" />
+    <script src="./dojoConfig.js"></script>
+
+    <!-- ArcGIS for JavaScript API 4.13 模块 -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.13/"></script>
+
+    <!-- 自定义 -->
+    <link rel="stylesheet" href="./index.css">
+    <script src="./index.js"></script>
+
+</head>
+<body class="calcite-maps calcite-nav-top">
+    
+    <!-- Navbar: 导航栏 -->
+    <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark">
+        <!-- Menu 菜单 -->
+        <div class="dropdown calcite-dropdown calcite-text-dark calcite-bg-light" role="presentation">
+            <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                <div class="calcite-dropdown-toggle">
+                    <span class="sr-only">Toggle dropdown menu</span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="active">
+                    <a href="#mapTab" class="hidden-md hidden-lg" aria-controls="mapTab" role="tab" data-toggle="tab">Map</a>
+                </li>
+                <li>
+                    <a href="#sceneTab" class="hidden-md hidden-lg" aria-controls="sceneTab" role="tab" data-toggle="tab">Scene</a>
+                </li>
+                <li>
+                    <a role="button" data-toggle="#panelBasemaps" aria-haspopup="true">
+                        <span class="glphicon glyphicon-th-large"></span>Basemap
+                    </a>
+                </li>
+                <li>
+                    <a role="button" data-toggle="#panelSettings" aria-haspopup="true">
+                        <span class="glphicon glyphicon-cog"></span>Settings
+                    </a>
+                </li>
+                <li>
+                    <a role="button" data-toggle="#calciteToggleNavbar" aria-haspopup="true">
+                        <span class="glphicon glyphicon-fullscreen"></span>Full Map
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Title: 标题 -->
+        <div class="calcite-title calcite-overflow-hidden">
+            <span class="calcite-title-main">Ngheizit GIS</span>
+            <span class="calcite-title-divider hidden-xs"></span>
+            <span class="calcite-title-sub hidden-xs">Welcome to WuXizhe's GIS world</span>
+        </div>
+        <!-- Nav: 导航 -->
+        <ul class="nav navbar-nav calcite-nav">
+            <li class="active">
+                <a id="mapNav" href="#mapTab" class="hidden-xs hidden-sm" aria-controls="mapTab" aria-expanded="true" role="tab" data-toggle="tab" data-tooltip="tip" title="2D View" data-placement="buttom">Map</a>
+            </li>
+            <li>
+                <a id="sceneNav" href="#sceneTab" class="hidden-xs hidden-sm" aria-controls="sceneTab" role="tab" data-toggle="tab" data-tooltip="tip" title="3D View" data-placement="buttom">Scene</a>
+            </li>
+            <li>
+                <div class="calcite-navbar-search calcite-search-expander"><div id="searchWidgetDiv"></div></div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Map: 地图控件 -->
+    <div class="calcite-map calcite-map-absolute">
+        <div id="tabContainer" class="tab-content">
+            <div id="mapTab" class="tab-pane fade in active" role="tabpanel">
+                <div id="axMapView"></div>
+            </div>
+            <div id="sceneTab" class="tab-pane fade" role="tabpanel">
+                <div id="axSceneView"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panels 功能板块 -->
+    
+</body>
+</html>
