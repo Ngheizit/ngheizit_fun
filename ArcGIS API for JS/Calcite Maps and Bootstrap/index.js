@@ -1,4 +1,5 @@
 var app;
+var bool_sketch = false;
 
 window.onload = function(){
     this.Main();
@@ -9,8 +10,9 @@ function Main(){
         "esri/Map",
         "esri/views/MapView",
         "esri/views/SceneView",
-        "esri/widgets/Search",
         "esri/widgets/BasemapGallery",
+        "esri/layers/GraphicsLayer",
+        "esri/widgets/Sketch",
         "esri/core/watchUtils",
         "calcite-maps/calcitemaps-v0.8", // Calcite Maps
         "calcite-maps/calcitemaps-arcgis-support-v0.8", // Calcite Maps ArcGIS Support
@@ -22,8 +24,9 @@ function Main(){
         Map, 
         MapView, 
         SceneView, 
-        Search, 
-        BasemapGallery, 
+        BasemapGallery,
+        GraphicsLayer,
+        Sketch,
         watchUtils, 
         CalciteMaps, 
         CalciteMapsArcGIS
@@ -46,6 +49,7 @@ function Main(){
                 // "attribution" // 地图脚注
             ],
             mapView: null,
+            sceneView: null,
             containerMap: "axMapView",
             containerScene: "axSceneView",
             activeView: null, // 当前视窗下（被激活）的视图（MapView or SceneView）
@@ -55,8 +59,10 @@ function Main(){
          * 创建地图和场景及相关ui控件
          */
         // Map
-        const map = new Map({
-            basemap: app.basemap
+        let graphicsLayer = new GraphicsLayer();
+        let map = new Map({
+            basemap: app.basemap,
+            layers: [graphicsLayer]
         });
         // 2D View
         app.mapView = new MapView({
@@ -87,12 +93,12 @@ function Main(){
 
 
         // 设置当前激活状态的视图（MapView or Scene View）
-        var setActiveView = function(view){
+        let setActiveView = function(view){
             app.activeView = view
         };
         // 切换视图时，同步MapView视图和SceneView视图位置
-        var syncViews = function(fromView, toView){
-            const viewPt = fromView.viewpoint.clone();
+        let syncViews = function(fromView, toView){
+            let viewPt = fromView.viewpoint.clone();
             if(fromView.type === "3d"){ // MapView => SceneView
                 toView.container = app.containerMap;
             }else{ // MapView => SceneView
@@ -104,7 +110,7 @@ function Main(){
         setActiveView(app.mapView); // 默认激活MapView视图
 
         // 地图切换与同步
-        const tabs = Array.from(document.querySelectorAll(".calcite-navbar li a[data-toggle='tab']"));
+        let tabs = Array.from(document.querySelectorAll(".calcite-navbar li a[data-toggle='tab']"));
         tabs.forEach(function(tab){
             tab.addEventListener("click", function(event){
                 if(event.target.text.indexOf("Map") > -1){ // 切换为SceneView视图
@@ -124,8 +130,20 @@ function Main(){
             container: "axBasemapPanel"
         });
 
-        // Settings 设置
-        
-        
+        app.activeView.when(function(){
+            let sketch = new Sketch({
+                view: app.activeView,
+                layer: graphicsLayer
+            })
+            let btn_drawGraphics = document.getElementById("btn-drawGraphics");
+            btn_drawGraphics.onclick = function(){
+                bool_sketch = !bool_sketch
+                if (bool_sketch) {
+                    app.activeView.ui.add(sketch, "top-right");
+                }else{
+                    app.activeView.ui.remove(sketch);
+                }
+            }
+        });
     });
 }
