@@ -25,7 +25,6 @@ function Main(){
         view.when(function(){
             var zoom_widget = document.getElementsByClassName("esri-component esri-zoom esri-widget")[0];
             zoom_widget.remove();
-            view.popup.autoOpenEnabled = true; // disable popups
             // Create the Editor
             var editor = new Editor({
                 view: view

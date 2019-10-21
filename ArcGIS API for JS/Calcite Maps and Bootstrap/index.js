@@ -1,18 +1,23 @@
 var app;
-var bool_sketch = false;
-
 window.onload = function(){
     this.Main();
 }
 
 function Main(){
+    var bool_sketch = false;
+    var cmd = document.getElementById("cmd");
+    function print(str){
+        cmd.innerHTML = str;
+    }
+
     require([
         "esri/Map",
         "esri/views/MapView",
-        "esri/views/SceneView",
         "esri/widgets/BasemapGallery",
         "esri/layers/GraphicsLayer",
         "esri/widgets/Sketch",
+        "esri/layers/Layer",
+        "esri/PopupTemplate",
         "esri/core/watchUtils",
         "calcite-maps/calcitemaps-v0.8", // Calcite Maps
         "calcite-maps/calcitemaps-arcgis-support-v0.8", // Calcite Maps ArcGIS Support
@@ -22,11 +27,12 @@ function Main(){
         "@dojo/framework/shim/array" // Can use @dojo shim for Array.from for IE11
     ], function(
         Map, 
-        MapView, 
-        SceneView, 
+        MapView,
         BasemapGallery,
         GraphicsLayer,
         Sketch,
+        Layer,
+        PopupTemplate,
         watchUtils, 
         CalciteMaps, 
         CalciteMapsArcGIS
@@ -39,8 +45,8 @@ function Main(){
             scale: 60000000, // 缩放比例
             basemap: "streets", // 底图源
             viewPadding: {
-                top: 50,
-                bottom: 0
+                top: 0,
+                bottom: 50
             },
             // 默认地图控件
             uiComponents: [
@@ -49,9 +55,7 @@ function Main(){
                 // "attribution" // 地图脚注
             ],
             mapView: null,
-            sceneView: null,
             containerMap: "axMapView",
-            containerScene: "axSceneView",
             activeView: null, // 当前视窗下（被激活）的视图（MapView or SceneView）
             searchWidget: null
         };
@@ -76,52 +80,10 @@ function Main(){
             }
         });
         CalciteMapsArcGIS.setPopupPanelSync(app.mapView);
-        // 3D View
-        app.sceneView = new SceneView({
-            container: app.containerScene,
-            map: map,
-            center: app.center,
-            scale: app.scale,
-            padding: app.viewPadding,
-            ui: {
-                components: app.uiComponents
-            }
-        });
-        CalciteMapsArcGIS.setPopupPanelSync(app.sceneView);
-
-        
-
-
         // 设置当前激活状态的视图（MapView or Scene View）
-        let setActiveView = function(view){
-            app.activeView = view
-        };
-        // 切换视图时，同步MapView视图和SceneView视图位置
-        let syncViews = function(fromView, toView){
-            let viewPt = fromView.viewpoint.clone();
-            if(fromView.type === "3d"){ // MapView => SceneView
-                toView.container = app.containerMap;
-            }else{ // MapView => SceneView
-                toView.container = app.containerScene;
-            }
-            toView.padding = app.viewPadding;
-            toView.viewpoint = viewPt;
-        };
-        setActiveView(app.mapView); // 默认激活MapView视图
+        app.activeView = app.mapView;
 
-        // 地图切换与同步
-        let tabs = Array.from(document.querySelectorAll(".calcite-navbar li a[data-toggle='tab']"));
-        tabs.forEach(function(tab){
-            tab.addEventListener("click", function(event){
-                if(event.target.text.indexOf("Map") > -1){ // 切换为SceneView视图
-                    syncViews(app.sceneView, app.mapView);
-                    setActiveView(app.mapView);
-                }else{ // 切换为MapView视图
-                    syncViews(app.mapView, app.sceneView);
-                    setActiveView(app.sceneView);
-                }
-            });
-        });
+
 
         // 底图选择功能
         // Create basemap widget
@@ -131,19 +93,57 @@ function Main(){
         });
 
         app.activeView.when(function(){
+            app.mapView.popup.autoOpenEnabled = true; // disable popups
             let sketch = new Sketch({
                 view: app.activeView,
                 layer: graphicsLayer
             })
-            let btn_drawGraphics = document.getElementById("btn-drawGraphics");
-            btn_drawGraphics.onclick = function(){
+            document.getElementById("btn-drawGraphics").onclick = function(){
                 bool_sketch = !bool_sketch
                 if (bool_sketch) {
-                    app.activeView.ui.add(sketch, "top-right");
+                    app.activeView.ui.add(sketch, "top-left");
                 }else{
                     app.activeView.ui.remove(sketch);
                 }
-            }
+            };
+            document.getElementById("btn-addlyr-url").onclick = function(){
+                let url = document.getElementById("txt-addlyr-url").value;
+                Layer.fromArcGISServerUrl({
+                    url: url,
+                    properties:{
+                        popupTemplate: new PopupTemplate({
+                            title: "{NAME}"
+                        })
+                    }
+                }).then(function(layer){
+                    map.add(layer);
+                    print('成功：添加图层 ' + layer.title);
+                }).catch(function(error){
+                    print('错误：URL格式错误或不存在');
+                });
+            };
+            document.getElementById("btn-addlyr-id").onclick = function(){
+                let id = document.getElementById("txt-addlyr-id").value;
+                Layer.fromPortalItem({
+                    portalItem: {
+                      id: id
+                    },
+                    properties:{
+                        popupTemplate: new PopupTemplate({
+                            title: "{NAME}"
+                        })
+                    }
+                }).then(function(layer){
+                    map.add(layer);
+                    print('成功：添加图层 ' + layer.title);
+                }).catch(function(error){
+                    print('错误：ID格式错误或不存在');
+                });
+            };
+            document.getElementById("btn-addlyr-clear").onclick = function(){
+                document.getElementById("txt-addlyr-id").value = "";
+                document.getElementById("txt-addlyr-url").value = "";
+            };
         });
     });
 }
