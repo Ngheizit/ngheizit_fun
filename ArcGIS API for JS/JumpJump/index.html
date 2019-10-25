@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跳一跳</title>
+
+    <style>
+        html, body, #axSceneView, #failure{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+        #failure{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: black;
+            opacity: 0.3;
+            visibility: hidden;
+        }
+    </style>
+
+    
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.13/"></script>
+    <script src="./Jump.js"></script>
+
+</head>
+<body>
+    
+    <div id="axSceneView">
+    </div>
+    <div id="failure"></div>
+
+</body>
+</html>
