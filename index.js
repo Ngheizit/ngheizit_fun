@@ -10,6 +10,7 @@ function createURL(bURL, bNAME){
 var items_n_e = [
     new createURL("note/note.html", "🌏 学识归档 🌏"),
     new createURL("MaySaying.html", "🌏 地图留言板 🌏"),
+    new createURL("JumpJump/index.html", "🌏 地图跳一跳 🌏"),
     new createURL("#", ""),
     new createURL("https://g3.luciaz.me/", "Google"),
     new createURL("https://translate.google.cn/", "Translate"),
