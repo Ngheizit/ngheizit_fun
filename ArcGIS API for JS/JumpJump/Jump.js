@@ -4,6 +4,7 @@ window.onload = function(){
 function Main(){
 
     let isMouseDown = false;
+    let isJumping = false;
     let startTime, endTime;
     
     require([
@@ -18,6 +19,9 @@ function Main(){
         var lon = 113;
         var lat = 23;
         var height = 500;
+        let time;
+        let length, length_to, maxHeight = 550, distance;
+        let value = 0;
 
 
         const graphicsLayer = new GraphicsLayer();
@@ -149,17 +153,20 @@ function Main(){
             axSceneView.onmouseup = function(){
 
                 if(isMouseDown){
-                    let time = endTime - startTime;
-                    pt.geometry = {
-                        type: "point", // autocasts as new Point()
-                        x: lon + (time * 0.00003),
-                        y: lat,
-                        z: 550
-                    };
+                    time = endTime - startTime;
+                    isJumping = true;
+                    length = lon;
+                    length_to = lon + (time * 0.00003);
+                    distance = time * 0.00003;
+
+                    // pt.geometry = {
+                    //     type: "point", // autocasts as new Point()
+                    //     x: lon + (time * 0.00003),
+                    //     y: lat,
+                    //     z: 550
+                    // };
                     
-                    if(pt.geometry.x > lon + jumpDis + 0.005 || pt.geometry.x < lon + jumpDis - 0.005){
-                        document.getElementById("failure").style.visibility = "visible";
-                    }
+                   
 
 
                     lon = lon + jumpDis;
@@ -193,16 +200,61 @@ function Main(){
                 }
             }
 
-            // 鼠标按下时触发
+            
             var timer = function(){
+                // 鼠标按下时触发
                 if(isMouseDown){
                     endTime = new Date().getTime();
                     height = height - 10;
                     box_from.geometry = createBox(lon, lat, height);
                 }
+                // 跳跃动画
+                if(isJumping){
+                    
+
+                    if((length_to - length) > (distance / 2)){
+                        maxHeight += 500;
+                    }else{
+                        maxHeight -= 500;
+                    }
+                    if((length_to - length) < (distance / 4)){
+                        maxHeight = 550;
+                    }
+                    
+
+                    length += (time * 0.00003) / 10;
+                    if(length < length_to){
+                        pt.geometry = {
+                            type: "point",
+                            x: length,
+                            y: lat,
+                            z: maxHeight
+                        };
+                    }else{
+                        isJumping = false;
+                        maxHeight = 550;
+                        if(pt.geometry.x > lon + 0.005 || pt.geometry.x < lon - 0.005){
+                            document.getElementById("failure").style.visibility = "visible";
+                            return;
+                        }
+                        value += 1;
+                        document.getElementById("value").innerHTML = "得分：" + value;
+                    }
+                }
             };
             window.setInterval(function(){timer()}, 100);
 
+            document.getElementById("redo").onclick = function(){
+                pt.geometry = {
+                    type: "point",
+                    x: lon,
+                    y: lat,
+                    z: maxHeight
+                };
+                document.getElementById("failure").style.visibility = "hidden";
+                value = 0;
+                document.getElementById("value").innerHTML = "得分：" + value;
+            };
             
             
         //     var polygonGraphic = new Graphic({

@@ -21,6 +21,29 @@
             opacity: 0.3;
             visibility: hidden;
         }
+        #redo{ 
+            height: 100px;
+            width: 150px;
+            font-size: 24px;
+            font-weight: bold;
+            position:absolute;
+            left:50%;    /* 定位父级的50% */
+            top:50%;
+            transform: translate(-50%,-50%); /*自己的50% */
+        }
+        #value{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100px;
+            width: 100%;
+            font-size: 72px;
+            font-weight: bold;
+            position:absolute;
+            text-align: center;
+            color: red;
+            opacity: 0.5;
+        }
     </style>
 
     
@@ -33,7 +56,10 @@
     
     <div id="axSceneView">
     </div>
-    <div id="failure"></div>
+    <div id="value">得分：</div>
+    <div id="failure">
+        <button id="redo">重新开始</button>
+    </div>
 
 </body>
 </html>
