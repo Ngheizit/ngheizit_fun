@@ -13,6 +13,8 @@ var items_n_e = [
     new createURL("JumpJump/index.html", "🌏 地图跳一跳 🌏"),
     new createURL("#", ""),
     new createURL("https://g3.luciaz.me/", "Google"),
+    new createURL("https://a.g456.top/", "Google 2"),
+    new createURL("https://cn.bing.com/", "Bing"),
     new createURL("https://translate.google.cn/", "Translate"),
     new createURL("Older/index.html", "个人网站(旧)入口1"),
     new createURL("https://ngheizit.github.io/winner", "个人网站(旧)入口2"),
