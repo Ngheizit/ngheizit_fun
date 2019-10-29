@@ -267,10 +267,10 @@ function Main(){
         // 当view加载完成后
         view.when(function(){
             // 关闭地图浏览控件
-            // var zoom_widget = document.getElementsByClassName("esri-component esri-zoom esri-widget")[0];
+            var footer = document.getElementsByClassName("esri-component esri-attribution esri-widget")[0];
             // var navigation_toggle_widget = document.getElementsByClassName("esri-component esri-navigation-toggle esri-widget")[0];
             // var interactive_widget = document.getElementsByClassName("esri-component esri-compass esri-widget--button esri-widget esri-interactive")[0];
-            // zoom_widget.remove();
+            footer.remove();
             // navigation_toggle_widget.remove();
             // interactive_widget.remove();
         });
