@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/themes/dark-red/main.css">
+    <script src="https://js.arcgis.com/4.13/"></script>
+
+    <style>
+        html, body, #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/Layer",
+            "esri/widgets/Legend",
+            "esri/tasks/QueryTask",
+            "esri/tasks/support/Query"
+        ], function(Map, MapView, Layer, Legend, QueryTask, Query) {
+      
+            let map = new Map({
+                basemap: "topo-vector"
+            });
+      
+            let view = new MapView({
+                container: "viewDiv",
+                map: map
+            });
+
+            view.on('pointer-move', ["Ctrl"], function(evt){
+                let pt = view.toMap({ 
+                    x: evt.x, 
+                    y: evt.y 
+                });
+                console.log(view.toMap(pt));
+            });
+
+            var renderer = {
+                type: "unique-value",
+                field: "COLOR",
+                defaultSymbol: { type: "simple-fill" },
+                uniqueValueInfos: [
+                    {
+                        value: "1",
+                        symbol: {
+                            type: "simple-fill", 
+                            color: "blue"
+                        }
+                    },
+                    {
+                        value: "2",
+                        symbol: {
+                            type: "simple-fill", 
+                            color: "green"
+                        }
+                    },
+                    {
+                        value: "3",
+                        symbol: {
+                            type: "simple-fill", 
+                            color: "#ff0000"
+                        }
+                    },
+                    {
+                        value: "4",
+                        symbol: {
+                            type: "simple-fill", 
+                            color: "yellow"
+                        }
+                    },
+                ]
+            }
+
+            
+
+            Layer.fromPortalItem({
+                portalItem: {
+                    id: "bfd082765c7c4fc4a752649c915a4b16"
+                }
+            }).then(function(layer) {
+                map.add(layer);
+                layer.opacity = 0.5;
+                layer.renderer = renderer;
+                let legend = new Legend({
+                    view: view,
+                    layerInfo: [
+                        {
+                            layer: layer,
+                            title: '省份'
+                        }
+                    ]
+                });
+                view.ui.add(legend, 'bottom-right');
+            }).then(function(){
+                let qTask = new QueryTask({
+                    url: 'https://services9.arcgis.com/8vu5jgpRPi7NCKmE/arcgis/rest/services/BOUA_PJ/FeatureServer/0'
+                });
+                var query = new Query({
+                    returnGeometry: true,
+                    outFields: ["*"]
+                });
+                query.where = 'COLOR = 1';
+                qTask.execute(query).then(function(result){
+                    console.log(result.features);
+                })
+            });
+
+            
+
+
+        });
+    </script>
+</head>
+<body>
+    <div id="viewDiv"></div>
+</body>
+</html>
