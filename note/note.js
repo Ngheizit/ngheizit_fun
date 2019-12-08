@@ -6,6 +6,7 @@ function createURL(bURL, bNAME){
 	return oURL;
 }
 var items = [
+    new createURL("./database/xf20191207.html", "$ 阿里云服务器+nodejs命令"),
     new createURL("./database/xf20191021.html", "$ glyphicon符号集字典"),
     new createURL("./database/xf20191007.html", "$ WebGL Matrix4对象所支持的方法和属性"),
     new createURL("./database/xf20191005.html", "$ Android 部分依赖项配置"),
